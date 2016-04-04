@@ -5,16 +5,17 @@ using CatExercise.Models;
 using CodeFirstCat;
 using System.Linq;
 
+
 namespace CatExerciceTest
 {
     [TestClass]
-    class UnitTestUserDAO
+    public class UnitTestUserDAO
     {
         [TestMethod]
-        public void findTest()
+        public void findTestUser()
         {
             IUserDAO userDAO = DAOFactory.getInstanceOfUser();
-           // Assert.IsNotNull(userDAO());
+            Assert.IsNotNull(userDAO.Find("test"));
         }         
     }
 }
