@@ -108,6 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\ICatThreadDAO.cs" />
+    <Compile Include="Dao\ICommentDAO.cs" />
+    <Compile Include="Dao\IUserDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
