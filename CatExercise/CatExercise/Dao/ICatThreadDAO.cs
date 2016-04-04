@@ -7,9 +7,9 @@ using CodeFirstCat;
 
 namespace CatExercise.Dao {
     interface ICatThreadDAO {
-        IList<CatThread> GetAll(bool actif);
-        IList<CatThread> FindByLogin(String login, bool actif);
-        IList<CatThread> FindByTitle(String partialTitle, bool actif);
+        ICollection<CatThread> GetAll(bool actif);
+        ICollection<CatThread> FindByLogin(String login, bool actif);
+        ICollection<CatThread> FindByTitle(String partialTitle, bool actif);
 
         bool Update(CatThread catThread);
         bool Insert(CatThread catThread);
