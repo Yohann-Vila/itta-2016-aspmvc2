@@ -10,26 +10,31 @@ namespace CatExercise.Dao {
         /// <summary>
         /// Returns all CatThread
         /// </summary>
-        /// <param name="actif">if set to true, returns only the active threads.
+        /// <param name="onlyActif">if set to true, returns only the active threads.
         /// if set to false, returns all threads.</param>
         /// <returns></returns>
-        ICollection<CatThreadView> GetAll(bool actif);
+        ICollection<CatThreadView> GetAll(bool onlyActif);
+        ICollection<CatThreadView> GetAll();
+
         /// <summary>
         /// Returns CatThread created by a certain user
         /// </summary>
         /// <param name="login">the exact login name of a user</param>
-        /// <param name="actif">if set to true, returns only the active threads.
+        /// <param name="onlyActif">if set to true, returns only the active threads.
         /// if set to false, returns all threads.</param>
         /// <returns></returns>
-        ICollection<CatThreadView> FindByLogin(String login, bool actif);
+        ICollection<CatThreadView> FindByLogin(String login, bool onlyActif);
+        ICollection<CatThreadView> FindByLogin(String login);
+
         /// <summary>
         /// Returns CatThread containing a certain string in the title
         /// </summary>
         /// <param name="partialTitle">a string that is part of some title(s)</param>
-        /// <param name="actif">if set to true, returns only the active threads.
+        /// <param name="onlyActif">if set to true, returns only the active threads.
         /// if set to false, returns all threads.</param>
         /// <returns></returns>
-        ICollection<CatThreadView> FindByTitle(String partialTitle, bool actif);
+        ICollection<CatThreadView> FindByTitle(String partialTitle, bool onlyActif);
+        ICollection<CatThreadView> FindByTitle(String partialTitle);
 
         bool Update(CatThreadView catThreadView);
         bool Insert(CatThreadView catThreadView);

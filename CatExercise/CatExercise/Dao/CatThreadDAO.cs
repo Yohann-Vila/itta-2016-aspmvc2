@@ -21,6 +21,11 @@ namespace CatExercise.Dao
             return CreateModelViewFromModel(cat);
         }
 
+        public ICollection<CatThreadView> FindByLogin(string login)
+        {
+            return FindByLogin(login, false);
+        }
+
         public ICollection<CatThreadView> FindByLogin(string login, bool actif)
         {
             IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif)
@@ -29,12 +34,22 @@ namespace CatExercise.Dao
             return ctvlist;
         }
 
+        public ICollection<CatThreadView> FindByTitle(string partialTitle)
+        {
+            return FindByTitle(partialTitle, false);
+        }
+
         public ICollection<CatThreadView> FindByTitle(string partialTitle, bool actif)
         {
             IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif)
                 .Where(thread => thread.Titre.Contains(partialTitle));
             IList<CatThreadView> ctvlist = catlist.Select(catthread => CreateModelViewFromModel(catthread)).ToList();
             return ctvlist;
+        }
+
+        public ICollection<CatThreadView> GetAll()
+        {
+            return GetAll(false);
         }
 
         public ICollection<CatThreadView> GetAll(bool actif)
