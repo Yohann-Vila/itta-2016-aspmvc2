@@ -8,18 +8,26 @@ namespace CatExercise.Dao
 {
     public class UserDAO : IUserDAO
     {
+        CatDB db = new CatDB();
 
-        //
         // GET: /Default1/
 
         public User Find(String login)
         {
-            throw new NotImplementedException();
+            User user = db.Users.FirstOrDefault(userx => userx.Login == login);
+            if (user == null)
+            {
+                return null;
+            }
+           // return CreateModelViewFromModel(user);
+            return user;
         }
 
         public ICollection<User> GetAll()
         {
-            throw new NotImplementedException();
+            IList<User> users = db.Users.Where(userx => userx.Banish != null).ToList();
+           
+            return users;
         }
 
   
