@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CodeFirstCat.Class1</StartupObject>
+    <StartupObject>CodeFirstCat.Init</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="CatDB.cs" />
     <Compile Include="CatThread.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Init.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

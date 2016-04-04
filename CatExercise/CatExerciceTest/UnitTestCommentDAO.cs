@@ -43,5 +43,6 @@ namespace CatExerciceTest {
             Assert.IsTrue(commentDAO.update(c));
             Assert.AreEqual(newName, commentDAO.findByID(1).Content);
         }
+
     }
 }
