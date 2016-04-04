@@ -18,14 +18,15 @@ namespace CatExerciceTest
         }
 
         [TestMethod]
-        public void OnlyOneAtStartTest()
+        public void AtLeastOneAtStartTest()
         {
             ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
-            Assert.AreEqual(dao.GetAll(true).Count, 1);
+            int count = dao.GetAll().Count;
+            Assert.IsTrue(count > 0);
         }
 
         [TestMethod]
-        public void CreateAThreadTest()
+        public void InsertThreadTest()
         {
             ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
             int count1 = dao.GetAll(false).Count;

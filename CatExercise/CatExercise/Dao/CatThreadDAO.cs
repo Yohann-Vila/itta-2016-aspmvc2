@@ -28,8 +28,9 @@ namespace CatExercise.Dao
 
         public ICollection<CatThreadView> FindByLogin(string login, bool actif)
         {
-            IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif)
-                .Where(thread => thread.User.Login == login);
+            ICollection<CatThread> catlist = GetAllOrOnlyActive(actif)
+                .Where(thread => thread.User != null && thread.User.Login == login)
+                .ToList();
             IList<CatThreadView> ctvlist = catlist.Select( catthread => CreateModelViewFromModel(catthread) ).ToList();
             return ctvlist;
         }
@@ -41,8 +42,9 @@ namespace CatExercise.Dao
 
         public ICollection<CatThreadView> FindByTitle(string partialTitle, bool actif)
         {
-            IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif)
-                .Where(thread => thread.Titre.Contains(partialTitle));
+            ICollection<CatThread> catlist = GetAllOrOnlyActive(actif)
+                .Where(thread => thread.Titre.Contains(partialTitle))
+                .ToList();
             IList<CatThreadView> ctvlist = catlist.Select(catthread => CreateModelViewFromModel(catthread)).ToList();
             return ctvlist;
         }
@@ -54,7 +56,7 @@ namespace CatExercise.Dao
 
         public ICollection<CatThreadView> GetAll(bool actif)
         {
-            IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif);
+            ICollection<CatThread> catlist = GetAllOrOnlyActive(actif);
             IList<CatThreadView> ctvlist = catlist.Select(catthread => CreateModelViewFromModel(catthread)).ToList();
             return ctvlist;
         }
@@ -66,13 +68,19 @@ namespace CatExercise.Dao
                 return false;
             }
 
-            var catThread = db.CatThreads.Create();
-            catThread.CreationDate = catThreadView.CreationDate;
-            catThread.Titre = catThreadView.Titre;
-            catThread.UriPhoto = catThreadView.UriPhoto;
-
             IUserDAO userDAO = DAOFactory.getInstanceOfUser();
-            catThread.User = userDAO.Find(catThreadView.UserName);
+            User user = userDAO.Find(catThreadView.UserName);
+
+            var catThread = new CatThread()
+            {
+                CreationDate = catThreadView.CreationDate,
+                Titre = catThreadView.Titre,
+                UriPhoto = catThreadView.UriPhoto,
+                User = user
+            };
+
+            var catThreadResult = db.CatThreads.Add(catThread);
+            
             return db.SaveChanges() > 0;
         }
 
@@ -102,7 +110,12 @@ namespace CatExercise.Dao
         ///////////////////////////////////////////////
 
         private CatThreadView CreateModelViewFromModel(CatThread ct)
-        {
+        { 
+            if (ct == null)
+            {
+                return null;
+            }
+
             return new CatThreadView()
             {
                 CatThreadId = ct.CatThreadId,
@@ -110,13 +123,13 @@ namespace CatExercise.Dao
                 Deleted = ct.Deleted,
                 Titre = ct.Titre,
                 UriPhoto = ct.UriPhoto,
-                UserName = ct.User.Login /* cat.User */
+                UserName = ct.User == null ? null : ct.User.Login /* cat.User */
             };
         }
 
-        private IQueryable<CatThread> GetAllOrOnlyActive(bool actif)
+        private ICollection<CatThread> GetAllOrOnlyActive(bool actif)
         {
-            return db.CatThreads.Where(thread => !(thread.Deleted && actif));
+            return db.CatThreads.Where(thread => !(thread.Deleted && actif)).ToList();
         }
     }
 }
