@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeFirstCat;
+using CatExercise.Models;
 
 namespace CatExercise.Dao {
     public interface ICatThreadDAO {
-        ICollection<CatThread> GetAll(bool actif);
-        ICollection<CatThread> FindByLogin(String login, bool actif);
-        ICollection<CatThread> FindByTitle(String partialTitle, bool actif);
+        ICollection<CatThreadView> GetAll(bool actif);
+        ICollection<CatThreadView> FindByLogin(String login, bool actif);
+        ICollection<CatThreadView> FindByTitle(String partialTitle, bool actif);
 
-        bool Update(CatThread catThread);
-        bool Insert(CatThread catThread);
-        CatThread FindByID(int id);
+        bool Update(CatThreadView catThread);
+        bool Insert(CatThreadView catThread);
+        CatThreadView FindByID(int id);
     }
 }
