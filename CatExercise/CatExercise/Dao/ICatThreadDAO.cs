@@ -7,12 +7,12 @@ using CodeFirstCat;
 
 namespace CatExercise.Dao {
     interface ICatThreadDAO {
-        public ICollection<CatThread> GetAll(bool actif);
-        public ICollection<CatThread> FindByLogin(String login, bool actif);
-        public ICollection<CatThread> FindByTitle(String partialTitle, bool actif);
+        ICollection<CatThread> GetAll(bool actif);
+        ICollection<CatThread> FindByLogin(String login, bool actif);
+        ICollection<CatThread> FindByTitle(String partialTitle, bool actif);
 
-        public bool Update(CatThread catThread);
-        public bool Insert(CatThread catThread);
-        public CatThread FindByID(int id);
+        bool Update(CatThread catThread);
+        bool Insert(CatThread catThread);
+        CatThread FindByID(int id);
     }
 }
