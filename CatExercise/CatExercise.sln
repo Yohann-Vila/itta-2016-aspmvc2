@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatExercise", "CatExercise\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirstCat", "CodeFirstCat\CodeFirstCat.csproj", "{BC4F72F6-50E1-430D-AB36-31827CA9F19F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatExerciceTest", "CatExerciceTest\CatExerciceTest.csproj", "{270AAA5F-29D6-4AEB-A3EA-3A3FEB68E552}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BC4F72F6-50E1-430D-AB36-31827CA9F19F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC4F72F6-50E1-430D-AB36-31827CA9F19F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC4F72F6-50E1-430D-AB36-31827CA9F19F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270AAA5F-29D6-4AEB-A3EA-3A3FEB68E552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270AAA5F-29D6-4AEB-A3EA-3A3FEB68E552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270AAA5F-29D6-4AEB-A3EA-3A3FEB68E552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270AAA5F-29D6-4AEB-A3EA-3A3FEB68E552}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
