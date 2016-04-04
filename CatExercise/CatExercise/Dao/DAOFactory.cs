@@ -10,9 +10,9 @@ namespace CatExercise.Dao {
     public static IUserDAO getInstanceOfUser() {
         switch (_SOURCE) {
             case "Entity":
-                throw new NotImplementedException();
+                return new UserDAO();
             default:
-                throw new NotImplementedException();
+                return new UserDAO();
         }
     }
     public static ICatThreadDAO getInstanceOfCatThread() {
