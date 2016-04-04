@@ -6,12 +6,10 @@ using System.Web;
 namespace CatExercise.Models {
     public class CommentView {
         public int CommentID { get; set; } 
-        public UserView User { get; set; }
-        public CatThreadView CatThread;
-        public String Login;
-        public DateTime? CreationDate;
-        public bool Deleted;
-        public String Content;
+        public String UserName { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public bool Deleted { get; set; }
+        public String Content { get; set; }
 
         public CommentView()
         {
