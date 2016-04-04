@@ -8,6 +8,8 @@ namespace CatExercise.Dao
 {
     public class CatThreadDAO : ICatThreadDAO
     {
+        CatDB db = new CatDB();
+
         public CatThread FindByID(int id)
         {
             throw new NotImplementedException();
