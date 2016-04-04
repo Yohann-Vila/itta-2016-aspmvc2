@@ -5,8 +5,12 @@ using System.Web;
 
 namespace CatExercise.Models {
     public class CommentView {
-        public int CommentID { get; set; } 
+        public int? CommentID { get; set; }
+        public int? CatThreadId { get; set; } 
+
         public String UserName { get; set; }
+        public int UserID { get; set; }
+
         public DateTime? CreationDate { get; set; }
         public bool Deleted { get; set; }
         public String Content { get; set; }
