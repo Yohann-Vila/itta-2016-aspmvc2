@@ -49,7 +49,7 @@ namespace CatExercise.Dao
             user.Login = userView.Login;
             user.Password = userView.Password;
             user.Pseudo= userView.Pseudo;
-            user.UserID = userView.UserID;
+           // user.UserID = userView.UserID;
             user.Banish = userView.Banish;
             user.Seclevel = userView.Seclevel;
  
