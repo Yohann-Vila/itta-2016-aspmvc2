@@ -12,27 +12,36 @@ namespace CatExercise.Dao
 
         public CatThread FindByID(int id)
         {
-            throw new NotImplementedException();
+            return db.CatThreads.FirstOrDefault(thread => thread.CatThreadId == id);
         }
 
         public ICollection<CatThread> FindByLogin(string login, bool actif)
         {
-            throw new NotImplementedException();
+            return db.CatThreads.Where(thread => thread.User.Login == login && thread.User.Banish == !actif).ToList();
         }
 
         public ICollection<CatThread> FindByTitle(string partialTitle, bool actif)
         {
-            throw new NotImplementedException();
+            return db.CatThreads.Where(thread => !(thread.Deleted && actif)).Where(thread => thread.Titre.Contains(partialTitle)).ToList();
         }
 
         public ICollection<CatThread> GetAll(bool actif)
         {
-            throw new NotImplementedException();
+            return db.CatThreads.ToList();
         }
 
         public bool Insert(CatThread catThread)
         {
-            throw new NotImplementedException();
+            db.CatThreads.Add(catThread);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool Update(CatThread catThread)
