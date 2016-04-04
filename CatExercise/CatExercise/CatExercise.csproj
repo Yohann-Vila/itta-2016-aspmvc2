@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\CatThreadDAO.cs" />
+    <Compile Include="Dao\CommentDAO.cs" />
     <Compile Include="Dao\ICatThreadDAO.cs" />
     <Compile Include="Dao\ICommentDAO.cs" />
     <Compile Include="Dao\IUserDAO.cs" />

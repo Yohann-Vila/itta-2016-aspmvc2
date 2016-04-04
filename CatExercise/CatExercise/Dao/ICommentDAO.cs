@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace CatExercise.Dao {
     public interface ICommentDAO {
-        public ICollection<Comment> getPostsFromThread(int IdThread, Boolean actif);
-        public Boolean insert(Comment c);
-        public Boolean update(Comment c);
-        public Comment findByID(int commentID);
+
+        ICollection<CommentDAO> getPostsFromThread(int IdThread, Boolean actif);
+        Boolean insert(CommentDAO c);
+        Boolean update(CommentDAO c);
+        CommentDAO findByID(int commentID);
     }
 }
