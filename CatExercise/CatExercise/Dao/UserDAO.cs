@@ -26,7 +26,7 @@ namespace CatExercise.Dao
 
         public ICollection<User> GetAll()
         {
-            IList<User> users = db.Users.Where(userx => userx.Banish != null).ToList();
+            IList<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
            
             return users;
         }
