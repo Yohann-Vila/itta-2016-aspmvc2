@@ -55,8 +55,10 @@ namespace CatExercise.Dao
             catThread.CreationDate = catThreadView.CreationDate;
             catThread.Titre = catThreadView.Titre;
             catThread.UriPhoto = catThreadView.UriPhoto;
-            // catThread.User = GetUserByUserName(catThreadView.UserName),
 
+            IUserDAO userDAO = DAOFactory.getInstanceOfUser();
+            //catThread.User = userDAO.     GetUserByUserName(catThreadView.UserName),
+            throw new NotImplementedException("catThread not correctly binds user yet");
             return db.SaveChanges() > 0;
         }
 
@@ -90,7 +92,6 @@ namespace CatExercise.Dao
             return new CatThreadView()
             {
                 CatThreadId = ct.CatThreadId,
-                //Comments = null /* cat.Comments */,
                 CreationDate = ct.CreationDate,
                 Deleted = ct.Deleted,
                 Titre = ct.Titre,
