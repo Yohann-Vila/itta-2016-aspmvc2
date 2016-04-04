@@ -17,12 +17,12 @@ namespace CatExercise.Dao
             return new CatThreadView()
             {
                 CatThreadId = cat.CatThreadId,
-                Comments = null /* cat.Comments */,
+                //Comments = null /* cat.Comments */,
                 CreationDate = cat.CreationDate,
                 Deleted = cat.Deleted,
                 Titre = cat.Titre,
                 UriPhoto = cat.UriPhoto,
-                User = null /* cat.User */
+                UserName = cat.User.Login /* cat.User */
                 
             };
         }
