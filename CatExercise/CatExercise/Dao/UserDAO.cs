@@ -3,33 +3,57 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CatExercise.Models;
 
 namespace CatExercise.Dao
 {
     public class UserDAO : IUserDAO
     {
-        //
+        CatDB db = new CatDB();
+
         // GET: /Default1/
 
         public User Find(String login)
         {
-            throw new NotImplementedException();
+            User user = db.Users.FirstOrDefault(userx => userx.Login == login);
+            if (user == null)
+            {
+                return null;
+            }
+           // return CreateModelViewFromModel(user);
+            return user;
         }
 
         public ICollection<User> GetAll()
         {
-            throw new NotImplementedException();
+            IList<User> users = db.Users.Where(userx => userx.Banish != null).ToList();
+           
+            return users;
         }
 
-  
-        public bool Update(User user)
+
+        public bool Update(User userView)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(User user)
+        public bool Insert(User userView)
         {
-            throw new NotImplementedException();
+            if (userView == null)
+            {
+                return false;
+            }
+
+            var user = db.Users.Create();
+            user.Creationdate = userView.Creationdate;
+            user.Login = userView.Login;
+            user.Password = userView.Password;
+            user.Pseudo= userView.Pseudo;
+            user.UserID = userView.UserID;
+            user.Banish = userView.Banish;
+            user.Seclevel = userView.Seclevel;
+ 
+            return db.SaveChanges() > 0;
         }
 
     }

@@ -12,5 +12,7 @@ namespace CatExercise.Models {
         public Boolean Banish { get; set; }
         public int Seclevel { get; set; }
         public DateTime? Creationdate { get; set; }
+
+        public UserView() { }
     }
 }

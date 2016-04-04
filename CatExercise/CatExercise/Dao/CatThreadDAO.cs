@@ -23,41 +23,65 @@ namespace CatExercise.Dao
 
         public ICollection<CatThreadView> FindByLogin(string login, bool actif)
         {
-            IList<CatThread> catlist = db.CatThreads.Where(thread => thread.User.Login == login && thread.User.Banish == !actif).ToList();
+            IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif)
+                .Where(thread => thread.User.Login == login);
             IList<CatThreadView> ctvlist = catlist.Select( catthread => CreateModelViewFromModel(catthread) ).ToList();
             return ctvlist;
         }
 
         public ICollection<CatThreadView> FindByTitle(string partialTitle, bool actif)
         {
-            throw new NotImplementedException();
-            //return db.CatThreads.Where(thread => !(thread.Deleted && actif)).Where(thread => thread.Titre.Contains(partialTitle)).ToList();
+            IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif)
+                .Where(thread => thread.Titre.Contains(partialTitle));
+            IList<CatThreadView> ctvlist = catlist.Select(catthread => CreateModelViewFromModel(catthread)).ToList();
+            return ctvlist;
         }
 
         public ICollection<CatThreadView> GetAll(bool actif)
         {
-            throw new NotImplementedException();
-            //return db.CatThreads.ToList();
+            IQueryable<CatThread> catlist = GetAllOrOnlyActive(actif);
+            IList<CatThreadView> ctvlist = catlist.Select(catthread => CreateModelViewFromModel(catthread)).ToList();
+            return ctvlist;
         }
 
-        public bool Insert(CatThreadView catThread)
+        public bool Insert(CatThreadView catThreadView)
         {
-            throw new NotImplementedException();
-            //db.CatThreads.Add(catThread);
-            //try
-            //{
-            //    db.SaveChanges();
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
-            //return true;
+            if (catThreadView == null)
+            {
+                return false;
+            }
+
+            var catThread = db.CatThreads.Create();
+            catThread.CreationDate = catThreadView.CreationDate;
+            catThread.Titre = catThreadView.Titre;
+            catThread.UriPhoto = catThreadView.UriPhoto;
+
+            IUserDAO userDAO = DAOFactory.getInstanceOfUser();
+            //catThread.User = userDAO.     GetUserByUserName(catThreadView.UserName),
+            throw new NotImplementedException("catThread not correctly binds user yet");
+            return db.SaveChanges() > 0;
         }
 
-        public bool Update(CatThreadView catThread)
+        public bool Update(CatThreadView catThreadView)
         {
-            throw new NotImplementedException();
+            if (catThreadView == null)
+            {
+                throw new ArgumentNullException("CatThreadDAO : trying to Update with a null parameter");
+            }
+
+            CatThread catThread = db.CatThreads.FirstOrDefault(ct => ct.CatThreadId == catThreadView.CatThreadId);
+            if (catThread == null)
+            {
+                return false;
+            }
+
+            catThread.CreationDate = catThreadView.CreationDate;
+            catThread.Titre = catThreadView.Titre;
+            catThread.Deleted = catThreadView.Deleted;
+            catThread.UriPhoto = catThreadView.UriPhoto;
+
+            return db.SaveChanges() > 0;
+
         }
 
 
@@ -68,13 +92,17 @@ namespace CatExercise.Dao
             return new CatThreadView()
             {
                 CatThreadId = ct.CatThreadId,
-                //Comments = null /* cat.Comments */,
                 CreationDate = ct.CreationDate,
                 Deleted = ct.Deleted,
                 Titre = ct.Titre,
                 UriPhoto = ct.UriPhoto,
                 UserName = ct.User.Login /* cat.User */
             };
+        }
+
+        private IQueryable<CatThread> GetAllOrOnlyActive(bool actif)
+        {
+            return db.CatThreads.Where(thread => !(thread.Deleted && actif));
         }
     }
 }
