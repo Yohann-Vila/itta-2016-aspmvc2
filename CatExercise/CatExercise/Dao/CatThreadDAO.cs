@@ -14,23 +14,18 @@ namespace CatExercise.Dao
         public CatThreadView FindByID(int id)
         {
             CatThread cat = db.CatThreads.FirstOrDefault(thread => thread.CatThreadId == id);
-            return new CatThreadView()
+            if (cat == null)
             {
-                CatThreadId = cat.CatThreadId,
-                //Comments = null /* cat.Comments */,
-                CreationDate = cat.CreationDate,
-                Deleted = cat.Deleted,
-                Titre = cat.Titre,
-                UriPhoto = cat.UriPhoto,
-                UserName = cat.User.Login /* cat.User */
-                
-            };
+                return null;
+            }
+            return CreateModelViewFromModel(cat);
         }
 
         public ICollection<CatThreadView> FindByLogin(string login, bool actif)
         {
-            throw new NotImplementedException();
-            //return db.CatThreads.Where(thread => thread.User.Login == login && thread.User.Banish == !actif).ToList();
+            IList<CatThread> catlist = db.CatThreads.Where(thread => thread.User.Login == login && thread.User.Banish == !actif).ToList();
+            IList<CatThreadView> ctvlist = catlist.Select( catthread => CreateModelViewFromModel(catthread) ).ToList();
+            return ctvlist;
         }
 
         public ICollection<CatThreadView> FindByTitle(string partialTitle, bool actif)
@@ -63,6 +58,23 @@ namespace CatExercise.Dao
         public bool Update(CatThreadView catThread)
         {
             throw new NotImplementedException();
+        }
+
+
+        ///////////////////////////////////////////////
+
+        private CatThreadView CreateModelViewFromModel(CatThread ct)
+        {
+            return new CatThreadView()
+            {
+                CatThreadId = ct.CatThreadId,
+                //Comments = null /* cat.Comments */,
+                CreationDate = ct.CreationDate,
+                Deleted = ct.Deleted,
+                Titre = ct.Titre,
+                UriPhoto = ct.UriPhoto,
+                UserName = ct.User.Login /* cat.User */
+            };
         }
     }
 }
