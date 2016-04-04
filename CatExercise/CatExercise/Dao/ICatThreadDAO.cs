@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CodeFirstCat;
 
 namespace CatExercise.Dao {
-    interface ICatThreadDAO {
+    public interface ICatThreadDAO {
         ICollection<CatThread> GetAll(bool actif);
         ICollection<CatThread> FindByLogin(String login, bool actif);
         ICollection<CatThread> FindByTitle(String partialTitle, bool actif);

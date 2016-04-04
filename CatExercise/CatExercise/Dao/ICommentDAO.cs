@@ -1,4 +1,4 @@
-﻿using CodeFirstCat;
+﻿using CatExercise.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace CatExercise.Dao {
     public interface ICommentDAO {
 
-        ICollection<Comment> getPostsFromThread(int IdThread, Boolean actif);
-        Boolean insert(Comment c);
-        Boolean update(Comment c);
-        Comment findByID(int commentID);
+        ICollection<CommentView> getPostsFromThread(int IdThread, Boolean actif);
+        Boolean insert(CommentView c);
+        Boolean update(CommentView c);
+        CommentView findByID(int commentID);
     }
 }
