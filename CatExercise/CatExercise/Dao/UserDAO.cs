@@ -15,7 +15,7 @@ namespace CatExercise.Dao
 
         public User Find(String login)
         {
-            User user = db.Users.FirstOrDefault(userx => userx.Login == login);
+            User user = db.Users.FirstOrDefault(userx => userx.Login.Equals(login));
             if (user == null)
             {
                 return null;
@@ -26,7 +26,7 @@ namespace CatExercise.Dao
 
         public ICollection<User> GetAll()
         {
-            IList<User> users = db.Users.Where(userx => userx.Banish != null).ToList();
+            IList<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
            
             return users;
         }
