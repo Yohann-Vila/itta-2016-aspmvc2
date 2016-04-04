@@ -57,8 +57,7 @@ namespace CatExercise.Dao
             catThread.UriPhoto = catThreadView.UriPhoto;
 
             IUserDAO userDAO = DAOFactory.getInstanceOfUser();
-            //catThread.User = userDAO.     GetUserByUserName(catThreadView.UserName),
-            throw new NotImplementedException("catThread not correctly binds user yet");
+            catThread.User = userDAO.Find(catThreadView.UserName);
             return db.SaveChanges() > 0;
         }
 
