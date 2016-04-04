@@ -34,7 +34,27 @@ namespace CatExercise.Dao
 
         public bool Update(User userView)
         {
-            throw new NotImplementedException();
+            if (userView == null)
+            {
+                throw new ArgumentNullException("UserDAO : trying to Update with a null parameter");
+            }
+
+            User user = db.Users.FirstOrDefault(ct => ct.UserID == userView.UserID);
+            if (userView == null)
+            {
+                return false;
+            }
+
+
+         // user.Creationdate = userView.Creationdate;
+            user.Login = userView.Login;
+            user.Password = userView.Password;
+            user.Pseudo = userView.Pseudo;
+           // user.UserID = userView.UserID;
+            user.Banish = userView.Banish;
+            user.Seclevel = userView.Seclevel;
+
+            return db.SaveChanges() > 0;
         }
 
         public bool Insert(User userView)
@@ -49,7 +69,7 @@ namespace CatExercise.Dao
             user.Login = userView.Login;
             user.Password = userView.Password;
             user.Pseudo= userView.Pseudo;
-            user.UserID = userView.UserID;
+           // user.UserID = userView.UserID;
             user.Banish = userView.Banish;
             user.Seclevel = userView.Seclevel;
  

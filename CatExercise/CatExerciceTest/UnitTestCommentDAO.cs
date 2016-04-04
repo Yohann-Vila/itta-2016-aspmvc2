@@ -34,5 +34,14 @@ namespace CatExerciceTest {
             ICommentDAO commentDAO = DAOFactory.getInstanceOfComment();
             Assert.IsNotNull(commentDAO.findByID(1)); 
         }
+        [TestMethod]
+        public void updateTest() {
+            ICommentDAO commentDAO = DAOFactory.getInstanceOfComment();
+            string newName = "TEST" + (new Random().Next()).ToString();
+            CommentView c = commentDAO.findByID(1);
+            c.Content = newName;
+            Assert.IsTrue(commentDAO.update(c));
+            Assert.AreEqual(newName, commentDAO.findByID(1).Content);
+        }
     }
 }

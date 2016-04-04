@@ -22,14 +22,16 @@ namespace CatExercise.Dao {
         }
 
         public bool update(CommentView c) {
-            model.Comments.Attach(CreateOrGetModelFromModelView(c));
-            var entry = model.Entry(c);
-            entry.Property(e => e.CommentID).IsModified = true;
+            var reslut = model.Comments.Where(com => com.CommentID == c.CommentID).FirstOrDefault();
+            if (reslut != null) {
+                reslut.Content = c.Content;
+                reslut.Deleted = c.Deleted;
+            }
             return model.SaveChanges() > 0;
         }
 
         public CommentView findByID(int commentID) {
-            var result = model.Comments.Where(c => c.CommentID == commentID).FirstOrDefault();
+            var result = model.Comments.Include("User").Include("CatThread").Where(c => c.CommentID == commentID).FirstOrDefault();
             if (result != null) { 
                 return CreateModelViewFromModel(result);
             }
