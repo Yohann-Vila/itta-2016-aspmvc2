@@ -16,22 +16,18 @@ namespace CatExercise.Dao
             throw new NotImplementedException();
         }
 
-        public ICollection<User> getAll(string login, bool actif)
+        public ICollection<User> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public bool insert(User user)
+  
+        public bool Update(User user)
         {
             throw new NotImplementedException();
         }
 
-        public bool update(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Insert(CatThread catThread)
+        public bool Insert(User user)
         {
             throw new NotImplementedException();
         }
