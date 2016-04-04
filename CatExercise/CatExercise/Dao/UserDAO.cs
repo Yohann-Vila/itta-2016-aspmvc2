@@ -15,7 +15,7 @@ namespace CatExercise.Dao
 
         public User Find(String login)
         {
-            User user = db.Users.FirstOrDefault(userx => userx.Login == login);
+            User user = db.Users.FirstOrDefault(userx => userx.Login.Equals(login));
             if (user == null)
             {
                 return null;
