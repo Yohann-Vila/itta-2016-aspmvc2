@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CatExercise.Models;
 
 namespace CatExercise.Dao
 {
@@ -30,15 +31,29 @@ namespace CatExercise.Dao
             return users;
         }
 
-  
-        public bool Update(User user)
+
+        public bool Update(User userView)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(User user)
+        public bool Insert(User userView)
         {
-            throw new NotImplementedException();
+            if (userView == null)
+            {
+                return false;
+            }
+
+            var user = db.Users.Create();
+            user.Creationdate = userView.Creationdate;
+            user.Login = userView.Login;
+            user.Password = userView.Password;
+            user.Pseudo= userView.Pseudo;
+            user.UserID = userView.UserID;
+            user.Banish = userView.Banish;
+            user.Seclevel = userView.Seclevel;
+ 
+            return db.SaveChanges() > 0;
         }
 
     }
