@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace CatExercise.Dao {
     public interface ICommentDAO {
 
-        ICollection<CommentDAO> getPostsFromThread(int IdThread, Boolean actif);
-        Boolean insert(CommentDAO c);
-        Boolean update(CommentDAO c);
-        CommentDAO findByID(int commentID);
+        ICollection<Comment> getPostsFromThread(int IdThread, Boolean actif);
+        Boolean insert(Comment c);
+        Boolean update(Comment c);
+        Comment findByID(int commentID);
     }
 }

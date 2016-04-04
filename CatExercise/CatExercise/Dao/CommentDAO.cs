@@ -6,21 +6,26 @@ using System.Web;
 
 namespace CatExercise.Dao {
     public class CommentDAO : ICommentDAO {
-        private CatDB cat = new CatDB();
-        public ICollection<CommentDAO> getPostsFromThread(int IdThread, bool actif) {
-            throw new NotImplementedException();
+        private CatDB model = new CatDB();
+        public ICollection<Comment> getPostsFromThread(int IdThread, bool actif) {
+            return model.Comments.Where(c => c.CatThread.CatThreadId == IdThread && c.Deleted == !actif).ToList();
         }
 
-        public bool insert(CommentDAO c) {
-            throw new NotImplementedException();
+        public bool insert(Comment c) {
+            model.Comments.Add(c);
+            return model.SaveChanges() > 0;
         }
 
-        public bool update(CommentDAO c) {
-            throw new NotImplementedException();
+        public bool update(Comment c) {
+            model.Comments.Attach(c);
+            var entry = model.Entry(c);
+            entry.Property(e => e.CommentID).IsModified = true;
+            return model.SaveChanges() > 0;
         }
 
-        public CommentDAO findByID(int commentID) {
-            throw new NotImplementedException();
+        public Comment findByID(int commentID) {
+            return model.Comments.Where(c => c.CommentID == commentID).FirstOrDefault();
+
         }
     }
 }
