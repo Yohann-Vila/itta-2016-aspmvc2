@@ -8,6 +8,7 @@ namespace CatExercise.Dao
 {
     public class UserDAO : IUserDAO
     {
+
         //
         // GET: /Default1/
 
