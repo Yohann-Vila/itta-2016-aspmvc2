@@ -10,5 +10,6 @@ namespace CatExercise.Dao {
         User Find(String login);
         bool Insert(User user);
         bool Update(User user);
+
     }
 }
