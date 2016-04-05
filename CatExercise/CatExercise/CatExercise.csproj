@@ -119,7 +119,6 @@
   <ItemGroup>
     <Compile Include="Controllers\CatThreadController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Dao\CatThreadDAO.cs" />
     <Compile Include="Dao\CommentDAO.cs" />
     <Compile Include="Dao\DAOFactory.cs" />
