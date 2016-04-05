@@ -13,5 +13,7 @@ namespace CatExercise.Dao {
         bool Insert(User user);
         bool Update(User user);
 
+        UserView getUserIfExist(UserView user);
+
     }
 }
