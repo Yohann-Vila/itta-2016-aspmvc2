@@ -14,7 +14,7 @@ namespace CatExercise.Controllers
         public ActionResult Index()
         {
             IUserDAO dao = DAOFactory.getInstanceOfUser();
-            ICollection<UserView> user = dao.getPostsFromUser("toto");
+            ICollection<UserView> user = dao.getPostsFromUser("test");
             return View(user);
 
         }
