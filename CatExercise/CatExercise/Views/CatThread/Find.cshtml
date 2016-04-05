@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Find";
+}
+
+<h1>Rechercher photo de chat</h1>
+<h2>Vous pouvez utiliser * pour tous les afficher</h2>
+<h2>@ViewBag.NoResult</h2>
+<form action="@Url.Action("find")" method="get">
+    <input name="what" type="text" /><button type="submit">Rechercher</button>
+</form>
