@@ -14,8 +14,8 @@ namespace CatExercise.Controllers {
             return View("find");
         }
 
-        public ActionResult Edit(int catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId);
+        public ActionResult Edit(int? catThreadId) {
+            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
@@ -26,16 +26,16 @@ namespace CatExercise.Controllers {
             return View();
         }
 
-        public ActionResult Details(int catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId);
+        public ActionResult Details(int? catThreadId) {
+            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
             return View();
         }
 
-        public ActionResult Delete(int catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId);
+        public ActionResult Delete(int? catThreadId) {
+            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
@@ -46,7 +46,7 @@ namespace CatExercise.Controllers {
         [HttpGet]
         public ActionResult Find(string what) {
             ICollection<CatThreadView> threads = null;
-            if (what == "*") {
+            if (what == "*" || what.Length == 0) {
                 threads = dao.GetAll();
             } else {
                 threads = dao.FindByTitle(what);
@@ -56,9 +56,7 @@ namespace CatExercise.Controllers {
             } else {
                 ViewBag.NoResult = "Pas de résultat";
                 return View("Find");
-
             }
-
         }
 
 
