@@ -28,7 +28,7 @@ namespace CatExercise.Controllers {
                     if (returnUrl != null && returnUrl.Length > 0) {
                         return RedirectToAction(returnUrl);
                     } else {
-                        return RedirectToAction("Index","CatThread");
+                        return RedirectToAction("Index", "CatThread");
                     }
                 }
             }
@@ -39,7 +39,38 @@ namespace CatExercise.Controllers {
         public String TestLogin() {
             return "OK";
         }
+        [AllowAnonymous]
         [HttpGet]
+        public ActionResult Register(string returnUrl) {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(UserView model, string returnUrl) {
+            if (ModelState.IsValid) {
+                IUserDAO dao = DAOFactory.getInstanceOfUser();
+                if (dao.Find(model.Login) == null) {
+                    model.Seclevel = 0;
+                    model.Banish = false;
+                    model.Creationdate = DateTime.Now;
+                    if (dao.Insert(model)) {
+                        FormsAuthentication.SetAuthCookie(model.UserID.ToString(), false);
+                        Session.Add("userName", model.Login);
+                        if (returnUrl != null && returnUrl.Length > 0) {
+                            return RedirectToAction(returnUrl);
+                        } else {
+                            return RedirectToAction("Index", "CatThread");
+                        }
+                    }
+                } else {
+                    ModelState.AddModelError("", "Le nom d'utilisateur exist deja");
+                }
+            }      
+            return View(model);
+        }
+
         public ActionResult LogOff(string returnUrl) {
             FormsAuthentication.SignOut();
             Session.Abandon();
