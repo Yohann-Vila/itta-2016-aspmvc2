@@ -168,19 +168,13 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\CatThread\Index.cshtml" />
-    <Content Include="Views\CatThread\Details.cshtml" />
-    <Content Include="Views\CatThread\View.cshtml" />
-    <Content Include="Views\CatThread\Edit.cshtml" />
-    <Content Include="Views\CatThread\Create.cshtml" />
+    <Content Include="Views\Comment\Index - Copier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeFirstCat\CodeFirstCat.csproj">
