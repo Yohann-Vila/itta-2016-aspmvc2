@@ -109,7 +109,7 @@ namespace CatExercise.Dao
 
         ///////////////////////////////////////////////
 
-        private CatThreadView CreateModelViewFromModel(CatThread ct)
+        public static CatThreadView CreateModelViewFromModel(CatThread ct)
         { 
             if (ct == null)
             {
