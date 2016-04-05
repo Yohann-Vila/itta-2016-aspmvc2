@@ -35,10 +35,18 @@ namespace CatExercise.Dao {
         /// if set to false, returns all threads.</param>
         /// <returns></returns>
         ICollection<CatThreadView> FindByTitle(String partialTitle, bool onlyActif);
+
         ICollection<CatThreadView> FindByTitle(String partialTitle);
 
         bool Update(CatThreadView catThreadView);
-        bool Insert(CatThreadView catThreadView);
+
+        /// <summary>
+        /// Insert a new CatThread into the database based on parameter
+        /// </summary>
+        /// <param name="catThreadView">if null, will throw an exception</param>
+        /// <returns>id of newly create CatThread</returns>
+        int Insert(CatThreadView catThreadView);
+
         CatThreadView FindByID(int id);
     }
 }
