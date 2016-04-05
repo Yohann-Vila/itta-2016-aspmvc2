@@ -34,17 +34,28 @@ namespace CatExercise.Dao
             };
         }
 
-        public User Find(String login)
+        public UserView Find(String login)
         {
             User user = db.Users.FirstOrDefault(userx => userx.Login.Equals(login));
             if (user == null)
             {
                 return null;
             }
-           // return CreateModelUserViewFromModel(user);
-            return user;
+            return CreateModelUserViewFromModel(user);
+           
         }
 
+        public UserView FindByID(int id)
+        {
+            var user = db.Users.FirstOrDefault(userx => userx.UserID == id);
+            if (user != null)
+            {
+                return CreateModelUserViewFromModel(user);
+            }
+            // return CreateModelUserViewFromModel(user);
+            return null;
+
+        }
         public ICollection<User> GetAll()
         {
             IList<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
