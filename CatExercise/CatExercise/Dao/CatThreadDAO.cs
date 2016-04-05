@@ -42,8 +42,9 @@ namespace CatExercise.Dao
 
         public ICollection<CatThreadView> FindByTitle(string partialTitle, bool actif)
         {
+            if(partialTitle == null) return new List<CatThreadView>();
             ICollection<CatThread> catlist = GetAllOrOnlyActive(actif)
-                .Where(thread => thread.Titre.Contains(partialTitle))
+                .Where(thread => thread.Titre != null && thread.Titre.Contains(partialTitle))
                 .ToList();
             IList<CatThreadView> ctvlist = catlist.Select(catthread => CreateModelViewFromModel(catthread)).ToList();
             return ctvlist;
