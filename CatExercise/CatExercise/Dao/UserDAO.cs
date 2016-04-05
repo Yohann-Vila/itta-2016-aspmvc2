@@ -12,6 +12,27 @@ namespace CatExercise.Dao
         CatDB db = new CatDB();
 
         // GET: /Default1/
+        private CatDB model = new CatDB();
+     
+        public ICollection<UserView> getPostsFromUser(String Login)
+        {
+            var users = model.Users.Where(c => c.Login.Equals(Login)).ToList();
+            ICollection<UserView> result = users.Select(
+                c => CreateModelUserViewFromModel(c)
+                ).ToList();
+            return result;
+        }
+        private UserView CreateModelUserViewFromModel(User user)
+        {
+            return new UserView()
+            {
+                Pseudo = user.Pseudo,
+                UserID = user.UserID,
+                Banish = user.Banish,
+                Seclevel = user.Seclevel,
+                Creationdate = user.Creationdate,
+            };
+        }
 
         public User Find(String login)
         {
