@@ -8,7 +8,7 @@ namespace CodeFirstCat
 {
     public class CatThread
     {
-        public int CatThreadId { get; set; }
+        public int CatThreadID { get; set; }
         public User User { get; set; }
         public String Titre { get; set; }
         public String UriPhoto { get; set; }

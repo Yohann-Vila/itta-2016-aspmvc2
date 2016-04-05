@@ -10,7 +10,7 @@ namespace CatExercise.Dao {
         private CatDB model = new CatDB();
         public CatThreadView getPostsFromThread(CatThreadView catThread) {
 
-            var comments = model.Comments.Where(c => c.CatThread.CatThreadId == catThread.CatThreadId).ToList();
+            var comments = model.Comments.Where(c => c.CatThread.CatThreadID == catThread.CatThreadId).ToList();
             ICollection<CommentView> result = comments.Select(
                 c => CreateModelViewFromModel(c)
                 ).ToList();
@@ -55,7 +55,7 @@ namespace CatExercise.Dao {
             } else {
                 return new Comment() {
                     User = model.Users.Where(u => u.UserID == comment.UserID).First(),
-                    CatThread = model.CatThreads.Where(ct => ct.CatThreadId == comment.catThread.CatThreadId).First(),
+                    CatThread = model.CatThreads.Where(ct => ct.CatThreadID == comment.catThread.CatThreadId).First(),
                     Content = comment.Content,
                     CreationDate = comment.CreationDate,
                     Deleted = comment.Deleted

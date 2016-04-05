@@ -13,7 +13,7 @@ namespace CatExercise.Dao
 
         public CatThreadView FindByID(int id)
         {
-            CatThread cat = db.CatThreads.FirstOrDefault(thread => thread.CatThreadId == id);
+            CatThread cat = db.CatThreads.FirstOrDefault(thread => thread.CatThreadID == id);
             if (cat == null)
             {
                 return null;
@@ -81,9 +81,10 @@ namespace CatExercise.Dao
             };
 
             var catThreadResult = db.CatThreads.Add(catThread);
-            if (db.SaveChanges() > 0)
+            db.SaveChanges();
+            if (catThreadResult != null)
             {
-                return catThreadResult.CatThreadId;
+                return catThreadResult.CatThreadID;
             }
             return 0;
         }
@@ -95,7 +96,7 @@ namespace CatExercise.Dao
                 throw new ArgumentNullException("CatThreadDAO : trying to Update with a null parameter");
             }
 
-            CatThread catThread = db.CatThreads.FirstOrDefault(ct => ct.CatThreadId == catThreadView.CatThreadId);
+            CatThread catThread = db.CatThreads.FirstOrDefault(ct => ct.CatThreadID == catThreadView.CatThreadId);
             if (catThread == null)
             {
                 return false;
@@ -122,7 +123,7 @@ namespace CatExercise.Dao
 
             return new CatThreadView()
             {
-                CatThreadId = ct.CatThreadId,
+                CatThreadId = ct.CatThreadID,
                 CreationDate = ct.CreationDate,
                 Deleted = ct.Deleted,
                 Titre = ct.Titre,
