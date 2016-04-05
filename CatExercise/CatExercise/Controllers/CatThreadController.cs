@@ -46,7 +46,7 @@ namespace CatExercise.Controllers {
         [HttpGet]
         public ActionResult Find(string what) {
             ICollection<CatThreadView> threads = null;
-            if (what == "*") {
+            if (what == "*" || what.Length == 0) {
                 threads = dao.GetAll();
             } else {
                 threads = dao.FindByTitle(what);
@@ -56,9 +56,7 @@ namespace CatExercise.Controllers {
             } else {
                 ViewBag.NoResult = "Pas de résultat";
                 return View("Find");
-
             }
-
         }
 
 
