@@ -13,6 +13,7 @@ namespace CatExerciceTest {
             //var result = commentDAO.getPostsFromThread(99999, true);
             Assert.AreEqual(0, 1);
         }
+
         [TestMethod]
         public void insertTest() {
             ICommentDAO commentDAO = DAOFactory.getInstanceOfComment();

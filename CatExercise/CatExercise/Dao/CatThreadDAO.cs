@@ -21,6 +21,8 @@ namespace CatExercise.Dao
             return CreateModelViewFromModel(cat);
         }
 
+        
+
         public ICollection<CatThreadView> FindByLogin(string login)
         {
             return FindByLogin(login, false);
@@ -70,23 +72,44 @@ namespace CatExercise.Dao
             }
 
             IUserDAO userDAO = DAOFactory.getInstanceOfUser();
-            User user = userDAO.Find(catThreadView.UserName);
-
-            var catThread = new CatThread()
+            UserView userView = userDAO.FindByID(catThreadView.UserID);
+            User user = null;
+            if (userView != null)
             {
-                CreationDate = catThreadView.CreationDate,
-                Titre = catThreadView.Titre,
-                UriPhoto = catThreadView.UriPhoto,
-                User = user
-            };
-
-            var catThreadResult = db.CatThreads.Add(catThread);
-            db.SaveChanges();
-            if (catThreadResult != null)
-            {
-                return catThreadResult.CatThreadID;
+                user = userDAO.Find(userView.Login);
             }
-            return 0;
+
+            CatThread catThread;
+            int random = new Random().Next() + 1;
+            if (catThreadView.Titre != null && catThreadView.UriPhoto != null && user != null)
+            {
+                catThread = new CatThread()
+                {
+                    CreationDate = DateTime.Now,
+                    Titre = catThreadView.Titre,
+                    UriPhoto = catThreadView.UriPhoto,
+                    User = user,
+                    TemporaryInt = random
+                };
+            }
+            else
+            {
+                return 0;
+            }
+            
+            db.CatThreads.Add(catThread);
+            db.SaveChanges();
+
+            catThread = db.CatThreads.Where(x => x.TemporaryInt == random).FirstOrDefault();
+            if (catThread == null)
+            {
+                return 0;
+            }
+            
+            catThread.TemporaryInt = 0;
+            db.SaveChanges();
+            return catThread.CatThreadID;
+
         }
 
         public bool Update(CatThreadView catThreadView)
@@ -102,7 +125,7 @@ namespace CatExercise.Dao
                 return false;
             }
 
-            catThread.CreationDate = catThreadView.CreationDate;
+            //catThread.CreationDate = catThreadView.CreationDate;
             catThread.Titre = catThreadView.Titre;
             catThread.Deleted = catThreadView.Deleted;
             catThread.UriPhoto = catThreadView.UriPhoto;

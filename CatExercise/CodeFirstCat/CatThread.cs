@@ -15,7 +15,7 @@ namespace CodeFirstCat
         public bool Deleted { get; set; }
         public DateTime? CreationDate { get; set; }
         public ICollection<Comment> Comments { get; set; }
-
+        public int TemporaryInt { get; set; }
         public CatThread()
         {
 

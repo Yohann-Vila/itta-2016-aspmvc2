@@ -26,6 +26,7 @@ namespace CatExercise.Dao
         {
             return new UserView()
             {
+                Login = user.Login,
                 Pseudo = user.Pseudo,
                 UserID = user.UserID,
                 Banish = user.Banish,

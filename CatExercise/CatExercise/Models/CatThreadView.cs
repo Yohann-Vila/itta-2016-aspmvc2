@@ -7,6 +7,7 @@ namespace CatExercise.Models {
     public class CatThreadView {
         public int CatThreadId { get; set; }
         public string UserName { get; set; }
+        public int UserID { get; set; }
         public String Titre { get; set; }
         public String UriPhoto { get; set; }
         public bool Deleted { get; set; }

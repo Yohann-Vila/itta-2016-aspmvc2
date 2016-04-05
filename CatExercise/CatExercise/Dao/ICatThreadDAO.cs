@@ -43,8 +43,8 @@ namespace CatExercise.Dao {
         /// <summary>
         /// Insert a new CatThread into the database based on parameter
         /// </summary>
-        /// <param name="catThreadView">if null, will throw an exception</param>
-        /// <returns>id of newly create CatThread</returns>
+        /// <param name="catThreadView">A valid CatThread, with Titre not null, valid USerID and URIPhoto not null.</param>
+        /// <returns>id of newly create CatThread, 0 if none has been created.</returns>
         int Insert(CatThreadView catThreadView);
 
         CatThreadView FindByID(int id);
