@@ -10,10 +10,12 @@ namespace CatExercise.Controllers {
     public class CatThreadController : Controller {
         ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
 
+        [HttpGet]
         public ActionResult Index() {
             return View("find");
         }
 
+        [HttpGet]
         public ActionResult Edit(int? catThreadId) {
             CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
@@ -22,10 +24,24 @@ namespace CatExercise.Controllers {
             return View(thread);
         }
 
-        public ActionResult Create() {
-            return View();
+        [HttpPost]
+        public ActionResult Edit(CatThreadView thread)
+        {
+            if (thread == null)
+            {
+                return HttpNotFound();
+            }
+            return View(thread);
         }
 
+        [HttpGet]
+        public ActionResult Create() {
+            CatThreadView miaou = new CatThreadView();
+            int id = dao.Insert(miaou);
+            return Edit(id);
+        }
+
+        [HttpGet]
         public ActionResult Details(int? catThreadId) {
             CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
@@ -34,6 +50,7 @@ namespace CatExercise.Controllers {
             return View();
         }
 
+        [HttpGet]
         public ActionResult Delete(int? catThreadId) {
             CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
