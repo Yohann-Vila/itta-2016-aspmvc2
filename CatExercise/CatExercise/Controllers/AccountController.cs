@@ -64,9 +64,10 @@ namespace CatExercise.Controllers {
                             return RedirectToAction("Index", "CatThread");
                         }
                     }
+                } else {
+                    ModelState.AddModelError("", "Le nom d'utilisateur exist deja");
                 }
-            }
-            ModelState.AddModelError("", "Le nom d'utilisateur exist deja");
+            }      
             return View(model);
         }
 
