@@ -176,6 +176,8 @@
     <Content Include="Views\CatThread\Edit.cshtml" />
     <Content Include="Views\CatThread\Index.cshtml" />
     <Content Include="Views\CatThread\View.cshtml" />
+    <Content Include="Views\CatThread\Find.cshtml" />
+    <Content Include="Views\CatThread\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
