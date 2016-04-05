@@ -1,23 +1,23 @@
-﻿@model IEnumerable<catexercise.models.commentview>
+﻿@model IEnumerable<CommentView>
 
     @{
-        ViewBag.Title = "Index";
+        ViewBag.Title = "index";
     }
 
     <div class="row">
-        <h1>${currentCatThread.titre}</h1>
+        <h1>@Model.catThread.Titre</h1>
     </div>
     <div class="row">
         <div class="col-sm-8">
             <div>
-                <img src="${currentCatThread.uriPhoto}" class="img-responsive" alt="photo du chat">
+                <img src="@Model.catThread.UriPhoto" class="img-responsive" alt="photo du chat">
             </div>
         </div>
 
         <div class="col-sm-4">
             <div>
-                <p>Crée par : ${currentCatThread.login}</p>
-                <p>Le : ${currentCatThread.creationDate}</p>
+                <p>Crée par : @Model.catThread.UserName</p>
+                <p>Le : @Model.catThread.CreationDate</p>
             </div>
         </div>
     </div>
@@ -27,16 +27,16 @@
             <p>Commentaires :</p><br>
         </div>
     </div>
-   @foreach (var item in Model) {
-       
-        
-            <div class="row">
-                <div class="col-md-4">@Html.DisplayFor(modelItem => item.UserName) <br><small>Le@Html.DisplayFor(modelItem => item.CreationDate)</small></div>
-                <div class="col-md-7">@Html.DisplayFor(modelItem => item.Content)</div>
-       
-            </div>
-            <div><br></div>
-        
-   }
+    @foreach (var item in Model) {
+
+
+        <div class="row">
+            <div class="col-md-4">@Html.DisplayFor(modelItem => item.UserName) <br><small>Le@Html.DisplayFor(modelItem => item.CreationDate)</small></div>
+            <div class="col-md-7">@Html.DisplayFor(modelItem => item.Content)</div>
+
+        </div>
+        <div><br></div>
+
+    }
 
 

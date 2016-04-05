@@ -8,12 +8,13 @@ using System.Web;
 namespace CatExercise.Dao {
     public class CommentDAO : ICommentDAO {
         private CatDB model = new CatDB();
-        public ICollection<CommentView> getPostsFromThread(int IdThread, bool actif) {
-            var comments = model.Comments.Where(c => c.CatThread.CatThreadId == IdThread && c.Deleted != actif).ToList();
+        public CatThreadView getPostsFromThread(CatThreadView catThread) {
+
+            var comments = model.Comments.Where(c => c.CatThread.CatThreadId == catThread.CatThreadId).ToList();
             ICollection<CommentView> result = comments.Select(
                 c => CreateModelViewFromModel(c)
                 ).ToList();
-            return result;
+            return catThread;
         }
 
         public bool insert(CommentView c) {

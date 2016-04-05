@@ -11,11 +11,13 @@ namespace CatExercise.Controllers
     public class CommentController : Controller
     {
         // GET: Comment
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            ICommentDAO dao = DAOFactory.getInstanceOfComment();
-            ICollection<CommentView> cms = dao.getPostsFromThread(1, false);
-            return View(cms);
+            ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
+            CatThreadView ct = dao.FindByID(id);
+            //ICollection<CommentView> cms = dao.getPostsFromThread(id, true);
+            //return View(cms);
+            throw new NotImplementedException();
 
         }
     }
