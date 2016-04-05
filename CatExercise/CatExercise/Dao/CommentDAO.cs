@@ -14,6 +14,7 @@ namespace CatExercise.Dao {
             ICollection<CommentView> result = comments.Select(
                 c => CreateModelViewFromModel(c)
                 ).ToList();
+            catThread.comments = result;
             return catThread;
         }
 

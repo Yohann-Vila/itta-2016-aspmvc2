@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CatExercise.Dao {
     public interface ICommentDAO {
 
-        ICollection<CommentView> getPostsFromThread(int IdThread, Boolean actif);
+        CatThreadView getPostsFromThread(CatThreadView cat);
         Boolean insert(CommentView c);
         Boolean update(CommentView c);
         CommentView findByID(int commentID);

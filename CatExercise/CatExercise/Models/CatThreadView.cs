@@ -10,6 +10,8 @@ namespace CatExercise.Models {
         public String Titre { get; set; }
         public String UriPhoto { get; set; }
         public bool Deleted { get; set; }
+        public ICollection<CommentView> comments { get; set; }
+
         public DateTime? CreationDate { get; set; }
         //public ICollection<CommentView> Comments { get; set; }
 

@@ -10,8 +10,8 @@ namespace CatExerciceTest {
         [TestMethod]
         public void getPostsFromThreadTest() {
             ICommentDAO commentDAO = DAOFactory.getInstanceOfComment();
-            var result = commentDAO.getPostsFromThread(99999, true);
-            Assert.AreEqual(0, result.Count);
+            //var result = commentDAO.getPostsFromThread(99999, true);
+            Assert.AreEqual(0, 1);
         }
         [TestMethod]
         public void insertTest() {
