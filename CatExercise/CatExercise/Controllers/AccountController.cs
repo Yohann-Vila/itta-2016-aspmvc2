@@ -15,10 +15,6 @@ namespace CatExercise.Controllers {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -26,7 +22,6 @@ namespace CatExercise.Controllers {
             if (ModelState.IsValid) {
                 IUserDAO dao = DAOFactory.getInstanceOfUser();
                 UserView userFromDB = dao.getUserIfExist(model);
-
                 if (userFromDB != null) {
                     FormsAuthentication.SetAuthCookie(userFromDB.UserID.ToString(), false);
                     Session.Add("userName", userFromDB.Login);
@@ -40,12 +35,10 @@ namespace CatExercise.Controllers {
             ModelState.AddModelError("", "Le nom d'utilisateur ou mot de passe fourni est incorrect.");
             return View(model);
         }
-
         [HttpGet]
         public String TestLogin() {
             return "OK";
         }
-
         [HttpGet]
         public ActionResult LogOff(string returnUrl) {
             FormsAuthentication.SignOut();
