@@ -10,15 +10,49 @@ namespace CatExercise.Controllers
 {
     public class CatThreadController : Controller
     {
-        //
-        // GET: /CatThread/
+       ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
 
         public ActionResult Index()
         {
-            ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
             ICollection<CatThreadView> catThreads = dao.GetAll();
             return View(catThreads);
         }
+
+        public ActionResult Edit(int catThreadId)
+        {
+            CatThreadView thread = dao.FindByID(catThreadId);
+            if (thread == null) {
+                return HttpNotFound();
+            }
+            return View(thread);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        public ActionResult Details(int catThreadId)
+        {
+            CatThreadView thread = dao.FindByID(catThreadId);
+            if (thread == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int catThreadId)
+        {
+            CatThreadView thread = dao.FindByID(catThreadId);
+            if (thread == null)
+            {
+                return HttpNotFound();
+            }
+            throw new NotImplementedException();
+        }
+
+        //////////////////
 
     }
 }
