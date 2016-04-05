@@ -41,8 +41,8 @@ namespace CatExercise.Dao
             {
                 return null;
             }
-           // return CreateModelViewFromModel(user);
-            return user;
+            return CreateModelUserViewFromModel(user);
+           
         }
 
         public ICollection<User> GetAll()
