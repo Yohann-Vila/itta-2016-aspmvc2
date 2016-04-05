@@ -6,8 +6,8 @@ using System.Web;
 namespace CatExercise.Models {
     public class CommentView {
         public int? CommentID { get; set; }
-       
-        public CatThreadView catThread { get; set; } 
+        public int? CatThreadId { get; set; } 
+
         public String UserName { get; set; }
         public int UserID { get; set; }
 

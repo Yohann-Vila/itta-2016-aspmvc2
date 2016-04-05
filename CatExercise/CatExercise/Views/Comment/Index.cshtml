@@ -1,42 +1,69 @@
-﻿@model IEnumerable<catexercise.models.commentview>
+﻿@model IEnumerable<CatExercise.Models.CommentView>
 
-    @{
-        ViewBag.Title = "Index";
-    }
+@{
+    ViewBag.Title = "Index";
+}
 
-    <div class="row">
-        <h1>${currentCatThread.titre}</h1>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <div>
-                <img src="${currentCatThread.uriPhoto}" class="img-responsive" alt="photo du chat">
-            </div>
-        </div>
+<h2>Index</h2>
 
-        <div class="col-sm-4">
-            <div>
-                <p>Crée par : ${currentCatThread.login}</p>
-                <p>Le : ${currentCatThread.creationDate}</p>
-            </div>
-        </div>
-    </div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CatThreadId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th></th>
+    </tr>
 
-    <div class="row">
-        <div>
-            <p>Commentaires :</p><br>
-        </div>
-    </div>
-   @foreach (var item in Model) {
-       
-        
-            <div class="row">
-                <div class="col-md-4">@Html.DisplayFor(modelItem => item.UserName) <br><small>Le@Html.DisplayFor(modelItem => item.CreationDate)</small></div>
-                <div class="col-md-7">@Html.DisplayFor(modelItem => item.Content)</div>
-       
-            </div>
-            <div><br></div>
-        
-   }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CatThreadId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
 
-
+</table>

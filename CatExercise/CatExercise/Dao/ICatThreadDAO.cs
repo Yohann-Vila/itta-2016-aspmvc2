@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CatExercise.Models;
-using CodeFirstCat;
 
 namespace CatExercise.Dao {
     public interface ICatThreadDAO {

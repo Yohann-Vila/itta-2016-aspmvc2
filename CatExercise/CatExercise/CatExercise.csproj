@@ -117,8 +117,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\CatThreadController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Dao\CatThreadDAO.cs" />
     <Compile Include="Dao\CommentDAO.cs" />
     <Compile Include="Dao\DAOFactory.cs" />
@@ -168,7 +168,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Comment\Index - Copier.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -41,7 +41,7 @@ namespace CatExercise.Dao {
             return new CommentView() {
                 UserName = comment.User.Pseudo,
                 CommentID = comment.CommentID,
-                catThread = CatThreadDAO.CreateModelViewFromModel(comment.CatThread),
+                CatThreadId = comment.CatThread.CatThreadId,
                 Content = comment.Content,
                 CreationDate = comment.CreationDate,
                 Deleted = comment.Deleted
@@ -53,7 +53,7 @@ namespace CatExercise.Dao {
             } else {
                 return new Comment() {
                     User = model.Users.Where(u => u.UserID == comment.UserID).First(),
-                    CatThread = model.CatThreads.Where(ct => ct.CatThreadId == comment.catThread.CatThreadId).First(),
+                    CatThread = model.CatThreads.Where(ct => ct.CatThreadId == comment.CatThreadId).First(),
                     Content = comment.Content,
                     CreationDate = comment.CreationDate,
                     Deleted = comment.Deleted
