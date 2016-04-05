@@ -16,8 +16,8 @@ namespace CatExercise.Controllers {
         }
 
         [HttpGet]
-        public ActionResult Edit(int? catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
+        public ActionResult Edit(int? id) {
+            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
@@ -36,9 +36,17 @@ namespace CatExercise.Controllers {
 
         [HttpGet]
         public ActionResult Create() {
-            CatThreadView miaou = new CatThreadView();
+            CatThreadView miaou = new CatThreadView()
+            {
+                Titre = "",
+                CreationDate = DateTime.Now,
+                UriPhoto = "",
+                Deleted = false,
+                UserName = "",
+                comments = null,
+            };
             int id = dao.Insert(miaou);
-            return Edit(id);
+            return RedirectToAction("Edit",new { id = miaou.CatThreadId });
         }
 
         [HttpGet]
