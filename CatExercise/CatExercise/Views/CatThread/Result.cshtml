@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CatExercise.Models.CatThreadView>
+
+@{
+    ViewBag.Title = "Result";
+}
+
+
+<h1>Liste des fils :</h1>
+<ul>
+    @foreach (var item in Model) {
+       
+            <li>@Html.ActionLink(item.Titre, "Details" ,new { id = item.CatThreadId }) </li>
+    }
+</ul>   
+
