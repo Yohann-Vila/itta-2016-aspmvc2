@@ -62,11 +62,11 @@ namespace CatExercise.Dao
             return ctvlist;
         }
 
-        public bool Insert(CatThreadView catThreadView)
+        public int Insert(CatThreadView catThreadView)
         {
             if (catThreadView == null)
             {
-                return false;
+                throw new ArgumentNullException("CatThreadDAO : Insert : Parameter catThreadView can't be null.");
             }
 
             IUserDAO userDAO = DAOFactory.getInstanceOfUser();
@@ -81,8 +81,11 @@ namespace CatExercise.Dao
             };
 
             var catThreadResult = db.CatThreads.Add(catThread);
-            
-            return db.SaveChanges() > 0;
+            if (db.SaveChanges() > 0)
+            {
+                return catThreadResult.CatThreadId;
+            }
+            return 0;
         }
 
         public bool Update(CatThreadView catThreadView)

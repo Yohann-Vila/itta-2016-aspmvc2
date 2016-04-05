@@ -10,32 +10,49 @@ namespace CatExercise.Controllers {
     public class CatThreadController : Controller {
         ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
 
+        [HttpGet]
         public ActionResult Index() {
             return View("find");
         }
 
-        public ActionResult Edit(int catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId);
+        [HttpGet]
+        public ActionResult Edit(int? catThreadId) {
+            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
             return View(thread);
         }
 
-        public ActionResult Create() {
-            return View();
+        [HttpPost]
+        public ActionResult Edit(CatThreadView thread)
+        {
+            if (thread == null)
+            {
+                return HttpNotFound();
+            }
+            return View(thread);
         }
 
-        public ActionResult Details(int catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId);
+        [HttpGet]
+        public ActionResult Create() {
+            CatThreadView miaou = new CatThreadView();
+            int id = dao.Insert(miaou);
+            return Edit(id);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int? catThreadId) {
+            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
             return View();
         }
 
-        public ActionResult Delete(int catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId);
+        [HttpGet]
+        public ActionResult Delete(int? catThreadId) {
+            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
