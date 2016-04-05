@@ -41,7 +41,7 @@ namespace CatExercise.Dao {
             return new CommentView() {
                 UserName = comment.User.Pseudo,
                 CommentID = comment.CommentID,
-                catThread = ICatThreadDAO.CreateModelViewFromModel(comment.CatThread),
+                catThread = CatThreadDAO.CreateModelViewFromModel(comment.CatThread),
                 Content = comment.Content,
                 CreationDate = comment.CreationDate,
                 Deleted = comment.Deleted

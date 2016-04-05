@@ -16,9 +16,11 @@ namespace CatExerciceTest {
         [TestMethod]
         public void insertTest() {
             ICommentDAO commentDAO = DAOFactory.getInstanceOfComment();
+            ICatThreadDAO threadDAO = DAOFactory.getInstanceOfCatThread();
+
             int num = new Random().Next();
             CommentView test = new CommentView() {
-                CatThreadId = 1,
+                catThread = threadDAO.FindByID(1),
                 Content = "TEST"+num,
                 UserID = 1,
                 Deleted = false,
