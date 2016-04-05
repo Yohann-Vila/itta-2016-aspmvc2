@@ -32,10 +32,11 @@ namespace CatExerciceTest
                 Seclevel = 0,
                 Creationdate = new DateTime().AddDays(1).AddMonths(5).AddYears(1999)
             };
-            //var result = UserDAO.Insert(test);
-            //Assert.IsTrue(result);
-            //CatDB model = new CatDB();
-            //Assert.AreEqual(model.Login.Where(c => c.Content == "TATA"+num).First().Content, "TATA"+num);
+
+            var result = userDAO.Insert(test);
+            Assert.IsTrue(result);
+            CatDB model = new CatDB();
+            Assert.AreEqual(model.Users.Where(c => c.Login == "TATA"+num).First().Login, "TATA"+num);
         }        
     }
 }

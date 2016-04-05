@@ -104,7 +104,7 @@ namespace CatExercise.Dao
            // user.UserID = userView.UserID;
             user.Banish = userView.Banish;
             user.Seclevel = userView.Seclevel;
- 
+            db.Users.Add(user);
             return db.SaveChanges() > 0;
         }
         public UserView getUserIfExist(UserView user) {
