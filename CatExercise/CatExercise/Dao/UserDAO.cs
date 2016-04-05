@@ -41,10 +41,21 @@ namespace CatExercise.Dao
             {
                 return null;
             }
-           // return CreateModelUserViewFromModel(user);
             return user;
+           
         }
 
+        public UserView FindByID(int id)
+        {
+            var user = db.Users.FirstOrDefault(userx => userx.UserID == id);
+            if (user != null)
+            {
+                return CreateModelUserViewFromModel(user);
+            }
+            // return CreateModelUserViewFromModel(user);
+            return null;
+
+        }
         public ICollection<User> GetAll()
         {
             IList<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
@@ -53,7 +64,7 @@ namespace CatExercise.Dao
         }
 
 
-        public bool Update(User userView)
+        public bool Update(UserView userView)
         {
             if (userView == null)
             {
@@ -78,7 +89,7 @@ namespace CatExercise.Dao
             return db.SaveChanges() > 0;
         }
 
-        public bool Insert(User userView)
+        public bool Insert(UserView userView)
         {
             if (userView == null)
             {
