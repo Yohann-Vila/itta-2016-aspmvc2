@@ -47,5 +47,12 @@ namespace CatExerciceTest
             ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
             Assert.AreEqual(dao.FindByLogin("inexisting login").Count, 0);
         }
+
+        [TestMethod]
+        public void FindByTitleTest()
+        {
+            ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
+            Assert.AreEqual(dao.FindByTitle(null).Count, 0);
+        }
     }
 }
