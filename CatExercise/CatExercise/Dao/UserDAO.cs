@@ -34,14 +34,14 @@ namespace CatExercise.Dao
             };
         }
 
-        public UserView Find(String login)
+        public User Find(String login)
         {
             User user = db.Users.FirstOrDefault(userx => userx.Login.Equals(login));
             if (user == null)
             {
                 return null;
             }
-            return CreateModelUserViewFromModel(user);
+            return user;
            
         }
 
@@ -64,7 +64,7 @@ namespace CatExercise.Dao
         }
 
 
-        public bool Update(User userView)
+        public bool Update(UserView userView)
         {
             if (userView == null)
             {
@@ -89,7 +89,7 @@ namespace CatExercise.Dao
             return db.SaveChanges() > 0;
         }
 
-        public bool Insert(User userView)
+        public bool Insert(UserView userView)
         {
             if (userView == null)
             {

@@ -10,9 +10,9 @@ namespace CatExercise.Dao {
         ICollection<UserView> getPostsFromUser(String Login);
         UserView FindByID(int UserID);
         ICollection<User> GetAll();
-        UserView Find(String login);
-        bool Insert(User user);
-        bool Update(User user);
+        User Find(String login);
+        bool Insert(UserView user);
+        bool Update(UserView user);
 
     }
 }
