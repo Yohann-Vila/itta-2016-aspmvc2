@@ -11,7 +11,7 @@ namespace CatExercise.Controllers
     public class UserController : Controller
     {
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
             IUserDAO dao = DAOFactory.getInstanceOfUser();
            // UserView user = dao.FindByID(id);

@@ -12,7 +12,7 @@
             @Html.DisplayNameFor(model => model.Login)
         </th>
         <th>
-       @* <%-- commentaire   @Html.DisplayNameFor(model => model.UserId) --%> *@
+            @Html.DisplayNameFor(model => model.UserID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Pseudo)
@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Seclevel)
         </th>
         <th>
-          @*  @Html.DisplayNameFor(model => model.CreationDate) *@
+          @Html.DisplayNameFor(model => model.Creationdate)
         </th>
         <th></th>
     </tr>
@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.Login)
         </td>
         <td>
-        @*    @Html.DisplayFor(modelItem => item.UserId) *@
+         @Html.DisplayFor(modelItem => item.UserID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Pseudo)
@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.Seclevel)
         </td>
         <td>
-         @*   @Html.DisplayFor(modelItem => item.CreationDate) *@
+          @Html.DisplayFor(modelItem => item.Creationdate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=1  }) |
