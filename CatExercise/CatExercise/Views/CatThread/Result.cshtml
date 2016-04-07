@@ -9,7 +9,15 @@
 <ul>
     @foreach (var item in Model) {
        
-            <li>@Html.ActionLink(item.Titre.IsEmpty()?"Titre par défaut":item.Titre,"Details",new { id = item.CatThreadId }) </li>
+            <li>@Html.ActionLink(item.Titre.IsEmpty()?"Titre par défaut":item.Titre,"Details",new { id = item.CatThreadId }) 
+    @if (User.IsInRole("admin")) {
+        if (item.Deleted) {
+            <a href="@Url.Action("UnDelete", new { id = item.CatThreadId })"><div class="glyphicon glyphicon-ok"></div></a>
+        } else {
+            <a href="@Url.Action("Delete", new { id = item.CatThreadId })"><div class="glyphicon glyphicon-remove"></div></a>
+        }
+    }   
+    </li>
     }
 </ul>   
 

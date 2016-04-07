@@ -23,7 +23,15 @@ namespace CatExercise.Controllers {
                 IUserDAO dao = DAOFactory.getInstanceOfUser();
                 UserView userFromDB = dao.getUserIfExist(model);
                 if (userFromDB != null) {
-                    FormsAuthentication.SetAuthCookie(userFromDB.UserID.ToString(), false);
+                    //FormsAuthentication.SetAuthCookie(userFromDB.UserID.ToString(), false);
+                    string role = "user";
+                    if (userFromDB.Seclevel == 100) {
+                        role += ";admin";
+                    }
+                    var authTicket = new FormsAuthenticationTicket(1,userFromDB.Login,DateTime.Now,DateTime.Now.AddMinutes(120),false,role);
+                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
                     Session.Add("userName", userFromDB.Login);
                     if (returnUrl != null && returnUrl.Length > 0) {
                         return RedirectToAction(returnUrl);
@@ -35,9 +43,13 @@ namespace CatExercise.Controllers {
             ModelState.AddModelError("", "Le nom d'utilisateur ou mot de passe fourni est incorrect.");
             return View(model);
         }
+        [AllowAnonymous]
         [HttpGet]
         public String TestLogin() {
-            return "OK";
+            Boolean test = User.IsInRole("user");
+            Boolean test2 = User.IsInRole("admin");
+
+            return User.ToString();
         }
         [AllowAnonymous]
         [HttpGet]
@@ -67,7 +79,7 @@ namespace CatExercise.Controllers {
                 } else {
                     ModelState.AddModelError("", "Le nom d'utilisateur exist deja");
                 }
-            }      
+            }
             return View(model);
         }
 

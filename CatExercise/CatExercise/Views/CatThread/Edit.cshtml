@@ -16,9 +16,9 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.DisplayNameFor(model => model.CatThreadId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DisplayNameFor(model => model.CatThreadId)
             <div class="col-md-10">
-                @Html.Display(model => model.CatThreadId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.CatThreadId)
             </div>
         </div>
 
