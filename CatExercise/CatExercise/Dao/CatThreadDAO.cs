@@ -151,7 +151,8 @@ namespace CatExercise.Dao
                 Deleted = ct.Deleted,
                 Titre = ct.Titre,
                 UriPhoto = ct.UriPhoto,
-                UserName = ct.User == null ? null : ct.User.Login /* cat.User */
+                UserName = ct.User == null ? null : ct.User.Login, /* cat.User */
+                comments = new List<CommentView>()
             };
         }
 
