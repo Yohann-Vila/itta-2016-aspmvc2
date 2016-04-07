@@ -22,9 +22,10 @@ namespace CatExercise.Dao
                 ).ToList();
             return result;
         }
+
         private UserView CreateModelUserViewFromModel(User user)
         {
-            return new UserView()
+            UserView userview = new UserView()
             {
                 Login = user.Login,
                 Pseudo = user.Pseudo,
@@ -33,6 +34,8 @@ namespace CatExercise.Dao
                 Seclevel = user.Seclevel,
                 Creationdate = user.Creationdate,
             };
+
+            return userview;
         }
 
         public User Find(String login)
@@ -43,7 +46,6 @@ namespace CatExercise.Dao
                 return null;
             }
             return user;
-           
         }
 
         public UserView FindByID(int id)

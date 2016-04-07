@@ -144,7 +144,7 @@ namespace CatExercise.Dao
                 return null;
             }
 
-            return new CatThreadView()
+            CatThreadView thread = new CatThreadView()
             {
                 CatThreadId = ct.CatThreadID,
                 CreationDate = ct.CreationDate,
@@ -152,13 +152,18 @@ namespace CatExercise.Dao
                 Titre = ct.Titre,
                 UriPhoto = ct.UriPhoto,
                 UserName = ct.User == null ? null : ct.User.Login, /* cat.User */
-                comments = new List<CommentView>()
+                //comments = new List<CommentView>()
             };
+
+            //attach comments
+            thread = DAOFactory.getInstanceOfComment().getPostsFromThread(thread);
+
+            return thread;
         }
 
         private ICollection<CatThread> GetAllOrOnlyActive(bool actif)
         {
-            return db.CatThreads.Where(thread => !(thread.Deleted && actif)).ToList();
+            return db.CatThreads.Where(thread => !(actif && thread.Deleted )).ToList();
         }
     }
 }
