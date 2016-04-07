@@ -15,7 +15,7 @@ namespace CodeFirstCat {
                 User = u,
                 CreationDate = DateTime.Now,
                 Deleted = false,
-                UriPhoto = "http://e2ua.com/data/wallpapers/209/WDF_2463360.jpg"
+                UriPhoto = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTBXkaWZEoI79WfgrigJV4IeHCFTqKnZA4yzJhnrks5SX7h-k48qw"
             };
             cat.CatThreads.Add(ct);
             cat.Comments.Add(new Comment() {
