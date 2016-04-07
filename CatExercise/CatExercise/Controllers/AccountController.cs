@@ -18,7 +18,7 @@ namespace CatExercise.Controllers {
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserView model, string returnUrl) {
+        public ActionResult Login(UserViewLogin model, string returnUrl) {
             if (ModelState.IsValid) {
                 IUserDAO dao = DAOFactory.getInstanceOfUser();
                 UserView userFromDB = dao.getUserIfExist(model);

@@ -16,5 +16,7 @@ namespace CatExercise.Dao {
 
         UserView getUserIfExist(UserView user);
 
+
+        UserView getUserIfExist(UserViewLogin model);
     }
 }

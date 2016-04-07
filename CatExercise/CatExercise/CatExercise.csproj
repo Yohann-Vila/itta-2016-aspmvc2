@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Models\CatThreadView.cs" />
     <Compile Include="Models\CommentView.cs" />
+    <Compile Include="Models\UserViewLogin.cs" />
     <Compile Include="Models\UserView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

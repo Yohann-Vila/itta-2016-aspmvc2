@@ -113,5 +113,11 @@ namespace CatExercise.Dao
             return u == null ? null : CreateModelUserViewFromModel(u);
         }
 
+
+
+        public UserView getUserIfExist(UserViewLogin user) {
+            User u = db.Users.FirstOrDefault(ct => ct.Login == user.Login && ct.Password == user.Password);
+            return u == null ? null : CreateModelUserViewFromModel(u);
+        }
     }
 }
