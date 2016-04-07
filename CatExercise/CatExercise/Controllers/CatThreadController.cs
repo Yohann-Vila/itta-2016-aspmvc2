@@ -50,17 +50,17 @@ namespace CatExercise.Controllers {
         }
 
         [HttpGet]
-        public ActionResult Details(int? catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
+        public ActionResult Details(int? id) {
+            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
-            return View();
+            return View(thread);
         }
 
         [HttpGet]
-        public ActionResult Delete(int? catThreadId) {
-            CatThreadView thread = dao.FindByID(catThreadId.HasValue ? catThreadId.Value : 0);
+        public ActionResult Delete(int? id) {
+            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
             if (thread == null) {
                 return HttpNotFound();
             }
