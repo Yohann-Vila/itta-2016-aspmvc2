@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -53,9 +50,9 @@
          @*   @Html.DisplayFor(modelItem => item.CreationDate) *@
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { id=1  }) |
+            @Html.ActionLink("Details", "Details", new { id=1  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=1  })
         </td>
     </tr>
 }
