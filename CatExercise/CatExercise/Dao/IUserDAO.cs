@@ -9,7 +9,7 @@ namespace CatExercise.Dao {
     public interface IUserDAO {
         ICollection<UserView> getPostsFromUser(String Login);
         UserView FindByID(int UserID);
-        ICollection<User> GetAll();
+        ICollection<UserView> GetAll();
         User Find(String login);
         bool Insert(UserView user);
         bool Update(UserView user);

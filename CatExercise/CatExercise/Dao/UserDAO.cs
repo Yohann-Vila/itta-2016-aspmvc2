@@ -59,11 +59,11 @@ namespace CatExercise.Dao
             return null;
 
         }
-        public ICollection<User> GetAll()
+        public ICollection<UserView> GetAll()
         {
-            IList<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
-           
-            return users;
+            ICollection<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
+            ICollection<UserView> vusers = users.Select(u => CreateModelUserViewFromModel(u)).ToList();
+            return vusers;
         }
 
 
