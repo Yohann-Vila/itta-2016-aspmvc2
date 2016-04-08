@@ -43,7 +43,7 @@ namespace CatExercise.Controllers
                 return HttpNotFound();
             }
 
-            
+            dao.Update(vuser);
 
             return View(vuser);
         }

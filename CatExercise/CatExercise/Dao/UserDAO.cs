@@ -82,6 +82,7 @@ namespace CatExercise.Dao
 
 
          // user.Creationdate = userView.Creationdate;
+
             user.Login = userView.Login;
             user.Password = userView.Password;
             user.Pseudo = userView.Pseudo;

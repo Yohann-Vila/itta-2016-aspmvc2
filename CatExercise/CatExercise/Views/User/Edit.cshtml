@@ -11,6 +11,9 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
+        <div>@Model.UserID </div>
+                @Html.HiddenFor(model => model.UserID)    
+
         <legend>UserView</legend>
         <div class="editor-label">
             @Html.LabelFor(model => model.Login)
@@ -42,15 +45,6 @@
             @Html.EditorFor(model => model.Seclevel)
             @Html.ValidationMessageFor(model => model.Seclevel)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Creationdate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Creationdate)
-            @Html.ValidationMessageFor(model => model.Creationdate)
-        </div>
-
         <p>
             <input type="submit" value="Save" />
         </p>
