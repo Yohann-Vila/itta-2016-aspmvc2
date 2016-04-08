@@ -10,7 +10,7 @@ namespace CatExercise.Dao {
         private CatDB model = new CatDB();
         public CatThreadView getPostsFromThread(CatThreadView catThread) {
 
-            var comments = model.Comments.Where(c => c.CatThread.CatThreadID == catThread.CatThreadId).ToList();
+            var comments = model.Comments.Include("User").Where(c => c.CatThread.CatThreadID == catThread.CatThreadId).ToList();
             ICollection<CommentView> result = comments.Select(
                 c => CreateModelViewFromModel(c)
                 ).ToList();
@@ -19,7 +19,8 @@ namespace CatExercise.Dao {
         }
 
         public bool insert(CommentView c) {
-            model.Comments.Add(CreateOrGetModelFromModelView(c));
+            Comment comment = CreateOrGetModelFromModelView(c);
+            model.Comments.Add(comment);
             return model.SaveChanges() > 0;
         }
 
@@ -33,7 +34,7 @@ namespace CatExercise.Dao {
         }
 
         public CommentView findByID(int commentID) {
-            var result = model.Comments.Include("User").Include("CatThread").Where(c => c.CommentID == commentID).FirstOrDefault();
+            var result = model.Comments.Include("Users").Include("CatThreads").Where(c => c.CommentID == commentID).FirstOrDefault();
             if (result != null) { 
                 return CreateModelViewFromModel(result);
             }
@@ -52,7 +53,7 @@ namespace CatExercise.Dao {
         }
         private Comment CreateOrGetModelFromModelView(CommentView comment) {
             if (comment.CommentID != null) {
-               return model.Comments.Where(c => c.CommentID == comment.CommentID).First();
+               return model.Comments.Include("Users").Where(c => c.CommentID == comment.CommentID).First();
             } else {
                 return new Comment() {
                     User = model.Users.Where(u => u.UserID == comment.UserID).First(),
