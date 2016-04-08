@@ -94,20 +94,25 @@ namespace CatExercise.Dao
             /// create thread
             CatThread catThread;
             int random = new Random().Next() + 1;
-            if (catThreadView.Titre != null && catThreadView.UriPhoto != null && user != null)
-            {
-                catThread = new CatThread()
-                {
-                    CreationDate = DateTime.Now,
-                    Titre = catThreadView.Titre,
-                    UriPhoto = catThreadView.UriPhoto,
-                    User = user,
-                    TemporaryInt = random
-                };
+            if (catThreadView.Titre == null) {
+                throw new NullReferenceException("Titre");
             }
-            else
+            if (catThreadView.UriPhoto == null)
             {
-                return 0;
+                throw new NullReferenceException("UriPhoto");
+            }
+            if (user == null)
+            {
+                throw new NullReferenceException("User");
+            }
+
+            catThread = new CatThread()
+            {
+                CreationDate = DateTime.Now,
+                Titre = catThreadView.Titre,
+                UriPhoto = catThreadView.UriPhoto,
+                User = user,
+                TemporaryInt = random
             }
             
             db.CatThreads.Add(catThread);
@@ -117,7 +122,7 @@ namespace CatExercise.Dao
             catThread = db.CatThreads.Where(x => x.TemporaryInt == random).FirstOrDefault();
             if (catThread == null)
             {
-                return 0;
+                throw new Exception("thread a pas pu être clair");
             }
             
             catThread.TemporaryInt = 0;
