@@ -36,7 +36,7 @@ namespace CatExercise.Controllers {
                     Session.Add("userID", userFromDB.UserID);
 
                     if (returnUrl != null && returnUrl.Length > 0) {
-                        return RedirectToAction(returnUrl);
+                        return Redirect(returnUrl);
                     } else {
                         return RedirectToAction("Index", "CatThread");
                     }
@@ -73,7 +73,7 @@ namespace CatExercise.Controllers {
                         FormsAuthentication.SetAuthCookie(model.UserID.ToString(), false);
                         Session.Add("userName", model.Login);
                         if (returnUrl != null && returnUrl.Length > 0) {
-                            return RedirectToAction(returnUrl);
+                            return Redirect(returnUrl);
                         } else {
                             return RedirectToAction("Index", "CatThread");
                         }

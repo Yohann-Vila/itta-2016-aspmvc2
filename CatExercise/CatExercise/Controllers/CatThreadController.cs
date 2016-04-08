@@ -98,6 +98,34 @@ namespace CatExercise.Controllers {
             return View(thread);
         }
 
+        [HttpPost]
+        [Authorize]
+        public ActionResult Details(int? id, string commentContent)
+        {
+            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
+
+            if (thread == null)
+            {
+                return HttpNotFound();
+            }
+ 
+            UserView user = DAOFactory.getInstanceOfUser().FindByLogin(User.Identity.Name);
+            var daoComment = DAOFactory.getInstanceOfComment();
+            CommentView comment = new CommentView()
+            {
+                catThread = thread,
+                Content = commentContent,
+                CreationDate = DateTime.Now,
+                Deleted = false,
+                UserName = user.Login,
+                UserID = user.UserID
+            };
+            
+            daoComment.insert(comment);
+
+            return View(thread);
+        }
+
         [HttpGet]
         [Authorize(Roles="admin")]
         public ActionResult Delete(int? id, string whatIn) {
