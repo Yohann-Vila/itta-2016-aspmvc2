@@ -106,14 +106,13 @@ namespace CatExercise.Dao
                 throw new NullReferenceException("User");
             }
 
-            catThread = new CatThread()
-            {
+            catThread = new CatThread() {
                 CreationDate = DateTime.Now,
                 Titre = catThreadView.Titre,
                 UriPhoto = catThreadView.UriPhoto,
                 User = user,
                 TemporaryInt = random
-            }
+            };
             
             db.CatThreads.Add(catThread);
             db.SaveChanges();
