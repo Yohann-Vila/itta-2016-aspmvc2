@@ -23,13 +23,9 @@ namespace CatExercise
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-        protected void Session_Start(Object sender, EventArgs e) {
-            Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now.AddHours(-1);
-      
-        }
 
         protected void Application_AuthenticateRequest(Object sender, EventArgs e) {
-            HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+            HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];            
             if (authCookie == null || authCookie.Value == "" )
                 return;
 

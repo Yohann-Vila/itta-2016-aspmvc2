@@ -58,13 +58,14 @@ namespace CatExercise.Controllers {
         public ActionResult Create(CatThreadView cathread) {
             if (ModelState.IsValid) {
                 // Use your file here
-                using (MemoryStream memoryStream = new MemoryStream()) {
+                
                     cathread.CreationDate = DateTime.Now;
 
-                    cathread.UserID = (int)Session["userID"];
-                    cathread.UserName = (String)Session["userName"];
-                    cathread.File.InputStream.CopyTo(memoryStream);
-                    int name = dao.Insert(cathread);
+                    cathread.UserID = int.Parse(User.Identity.Name);
+
+                    cathread.UserName = DAOFactory.getInstanceOfUser().FindByID(cathread.UserID).Login;
+                   
+                    int id = dao.Insert(cathread);
                     String ext = "";
                     if (cathread.File.FileName.Contains("jpg")) {
                         ext = "jpg";
@@ -78,14 +79,20 @@ namespace CatExercise.Controllers {
                     if (ext == String.Empty) {
                         ModelState.AddModelError("File", "Merci de choisir une extension valide");
                     }
-                    var fileName = name + "." + ext;
-
+                    var fileName = id + "." + ext;
+                    
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                    cathread.UriPhoto = path;
+                    using (FileStream fileStream = new FileStream(path,FileMode.CreateNew)) {
+                        cathread.File.InputStream.CopyTo(fileStream);
+                    }
+
+                    cathread.UriPhoto = "/Images/" + fileName;
+                    cathread.CatThreadId = id;
                     dao.Update(cathread);
+
                     return RedirectToAction("AjoutOK");
 
-                }
+               
             }
             return View(cathread);
         }

@@ -97,10 +97,7 @@ namespace CatExercise.Dao
             if (catThreadView.Titre == null) {
                 throw new NullReferenceException("Titre");
             }
-            if (catThreadView.UriPhoto == null)
-            {
-                throw new NullReferenceException("UriPhoto");
-            }
+
             if (user == null)
             {
                 throw new NullReferenceException("User");

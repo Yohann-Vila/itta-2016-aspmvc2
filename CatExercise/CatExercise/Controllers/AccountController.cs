@@ -28,12 +28,10 @@ namespace CatExercise.Controllers {
                     if (userFromDB.Seclevel == 100) {
                         role += ";admin";
                     }
-                    var authTicket = new FormsAuthenticationTicket(1,userFromDB.Login,DateTime.Now,DateTime.Now.AddMinutes(120),false,role);
+                    var authTicket = new FormsAuthenticationTicket(1,userFromDB.UserID.ToString(),DateTime.Now,DateTime.Now.AddMinutes(120),false,role);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
-                    Session.Add("userName", userFromDB.Login);
-                    Session.Add("userID", userFromDB.UserID);
 
                     if (returnUrl != null && returnUrl.Length > 0) {
                         return Redirect(returnUrl);
