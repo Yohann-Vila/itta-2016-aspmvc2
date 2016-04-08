@@ -48,6 +48,7 @@ namespace CatExercise.Dao
             return user;
         }
 
+
         public UserView FindByID(int id)
         {
             var user = db.Users.FirstOrDefault(userx => userx.UserID == id);
