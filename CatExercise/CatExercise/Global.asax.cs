@@ -14,6 +14,7 @@ namespace CatExercise
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -22,9 +23,14 @@ namespace CatExercise
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+        protected void Session_Start(Object sender, EventArgs e) {
+            Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now.AddHours(-1);
+      
+        }
+
         protected void Application_AuthenticateRequest(Object sender, EventArgs e) {
             HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
-            if (authCookie == null || authCookie.Value == "")
+            if (authCookie == null || authCookie.Value == "" )
                 return;
 
             FormsAuthenticationTicket authTicket;

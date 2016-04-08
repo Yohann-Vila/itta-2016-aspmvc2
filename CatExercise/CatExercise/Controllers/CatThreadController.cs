@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CatExercise.Dao;
 using CatExercise.Models;
+using System.IO;
 
 namespace CatExercise.Controllers {
     public class CatThreadController : Controller {
@@ -39,19 +40,55 @@ namespace CatExercise.Controllers {
         [HttpGet]
         [Authorize]
         public ActionResult Create() {
-            CatThreadView miaou = new CatThreadView()
-            {
-                Titre = "",
-                CreationDate = DateTime.Now,
-                UriPhoto = "",
-                Deleted = false,
-                UserName = User.Identity.Name,
-                comments = null,
-            };
-            int id = dao.Insert(miaou);
-            return RedirectToAction("Edit",new { id = id });
+            //CatThreadView miaou = new CatThreadView()
+            //{
+            //    Titre = "",
+            //    CreationDate = DateTime.Now,
+            //    UriPhoto = "",
+            //    Deleted = false,
+            //    UserName = User.Identity.Name,
+            //    comments = null,
+            //};
+            //int id = dao.Insert(miaou);
+            //return RedirectToAction("Edit",new { id = id });
+            return View(new CatThreadView());
         }
+        [HttpPost]
+        [Authorize]
+        public ActionResult Create(CatThreadView cathread) {
+            if (ModelState.IsValid) {
+                // Use your file here
+                using (MemoryStream memoryStream = new MemoryStream()) {
+                    cathread.CreationDate = DateTime.Now;
 
+                    cathread.UserID = (int)Session["userID"];
+                    cathread.UserName = (String)Session["userName"];
+                    cathread.File.InputStream.CopyTo(memoryStream);
+                    int name = dao.Insert(cathread);
+                    String ext = "";
+                    if (cathread.File.FileName.Contains("jpg")) {
+                        ext = "jpg";
+                    }
+                    if (cathread.File.FileName.Contains("png")) {
+                        ext = "jpg";
+                    }
+                    if (cathread.File.FileName.Contains("gif")) {
+                        ext = "jpg";
+                    }
+                    if (ext == String.Empty) {
+                        ModelState.AddModelError("File", "Merci de choisir une extension valide");
+                    }
+                    var fileName = name + "." + ext;
+
+                    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                    cathread.UriPhoto = path;
+                    dao.Update(cathread);
+                    return RedirectToAction("AjoutOK");
+
+                }
+            }
+            return View(cathread);
+        }
         [HttpGet]
         public ActionResult Details(int? id) {
             CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);

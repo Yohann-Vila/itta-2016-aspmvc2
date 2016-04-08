@@ -33,6 +33,8 @@ namespace CatExercise.Controllers {
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);
                     Session.Add("userName", userFromDB.Login);
+                    Session.Add("userID", userFromDB.UserID);
+
                     if (returnUrl != null && returnUrl.Length > 0) {
                         return RedirectToAction(returnUrl);
                     } else {
