@@ -13,7 +13,7 @@ namespace CatExercise.Dao
 
         public CatThreadView FindByID(int id)
         {
-            CatThread cat = db.CatThreads.FirstOrDefault(thread => thread.CatThreadID == id);
+            CatThread cat = db.CatThreads.Include("User").FirstOrDefault(thread => thread.CatThreadID == id);
             if (cat == null)
             {
                 return null;
@@ -71,14 +71,27 @@ namespace CatExercise.Dao
                 throw new ArgumentNullException("CatThreadDAO : Insert : Parameter catThreadView can't be null.");
             }
 
+            /// bind user
             IUserDAO userDAO = DAOFactory.getInstanceOfUser();
-            UserView userView = userDAO.FindByID(catThreadView.UserID);
+            UserView userView;
             User user = null;
-            if (userView != null)
+            if(catThreadView.UserID != 0)
             {
-                user = userDAO.Find(userView.Login);
+                //id specified : find correct user with this information with that
+                userView = userDAO.FindByID(catThreadView.UserID);
+                if (userView != null)
+                {
+                    user = userDAO.Find(userView.Login);
+                }
+            }
+            else
+            {
+                //no id has been specified : check with username
+                user = userDAO.Find(catThreadView.UserName);
             }
 
+
+            /// create thread
             CatThread catThread;
             int random = new Random().Next() + 1;
             if (catThreadView.Titre != null && catThreadView.UriPhoto != null && user != null)
@@ -100,6 +113,7 @@ namespace CatExercise.Dao
             db.CatThreads.Add(catThread);
             db.SaveChanges();
 
+            // finds back the newly inserted thread and returns ID
             catThread = db.CatThreads.Where(x => x.TemporaryInt == random).FirstOrDefault();
             if (catThread == null)
             {
@@ -152,6 +166,7 @@ namespace CatExercise.Dao
                 Titre = ct.Titre,
                 UriPhoto = ct.UriPhoto,
                 UserName = ct.User == null ? null : ct.User.Login, /* cat.User */
+                UserID = ct.User == null ? 0 : ct.User.UserID
                 //comments = new List<CommentView>()
             };
 

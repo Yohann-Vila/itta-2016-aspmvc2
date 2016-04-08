@@ -37,6 +37,7 @@ namespace CatExercise.Controllers {
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create() {
             CatThreadView miaou = new CatThreadView()
             {
@@ -44,11 +45,11 @@ namespace CatExercise.Controllers {
                 CreationDate = DateTime.Now,
                 UriPhoto = "",
                 Deleted = false,
-                UserName = "",
+                UserName = User.Identity.Name,
                 comments = null,
             };
             int id = dao.Insert(miaou);
-            return RedirectToAction("Edit",new { id = miaou.CatThreadId });
+            return RedirectToAction("Edit",new { id = id });
         }
 
         [HttpGet]

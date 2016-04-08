@@ -38,9 +38,27 @@
     </div>
         <div><br></div>
 }
+<div class="row">
+    @{if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <textarea cols="80" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Envoyer"/>
+
+            }
 
 
-
+        }
+    }
+</div>
 <p>
     @{ if (Request.IsAuthenticated && User.Identity.Name == Model.UserName)
         {
