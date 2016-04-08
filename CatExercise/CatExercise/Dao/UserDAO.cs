@@ -28,7 +28,6 @@ namespace CatExercise.Dao
             UserView userview = new UserView()
             {
                 Login = user.Login,
-                Pseudo = user.Pseudo,
                 UserID = user.UserID,
                 Banish = user.Banish,
                 Seclevel = user.Seclevel,
@@ -96,7 +95,6 @@ namespace CatExercise.Dao
 
             user.Login = userView.Login;
             user.Password = userView.Password;
-            user.Pseudo = userView.Pseudo;
            // user.UserID = userView.UserID;
             user.Banish = userView.Banish;
             user.Seclevel = userView.Seclevel;
@@ -115,7 +113,6 @@ namespace CatExercise.Dao
             user.Creationdate = userView.Creationdate;
             user.Login = userView.Login;
             user.Password = userView.Password;
-            user.Pseudo= userView.Pseudo;
            // user.UserID = userView.UserID;
             user.Banish = userView.Banish;
             user.Seclevel = userView.Seclevel;

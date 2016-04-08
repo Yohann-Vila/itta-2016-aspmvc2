@@ -27,7 +27,6 @@ namespace CatExerciceTest
                 Login = "TATA"+num,
                 Password = "Pa$$w0rd",
                 UserID = 110,
-                Pseudo = "-Tatasse",
                 Banish = false,
                 Seclevel = 0,
                 Creationdate = new DateTime().AddDays(1).AddMonths(5).AddYears(1999)
