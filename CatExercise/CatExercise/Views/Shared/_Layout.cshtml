@@ -23,8 +23,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    @if (User.IsInRole("Admin"))
+                    @if (User.IsInRole("admin"))
                       {
+                        <li><a> * Admin * </a></li>
                         <li>@Html.ActionLink("Index", "Index", "User")</li>
                       }
 
