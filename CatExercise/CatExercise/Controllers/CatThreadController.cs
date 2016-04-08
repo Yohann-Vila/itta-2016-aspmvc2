@@ -61,20 +61,34 @@ namespace CatExercise.Controllers {
         }
 
         [HttpGet]
-        public ActionResult Delete(int? id) {
-            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
+        [Authorize(Roles="admin")]
+        public ActionResult Delete(int? id, string whatIn) {
+            return DeleteORNot(id.HasValue ? id.Value : 0, whatIn, true);
+        }
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult UnDelete(int? id, string whatIn) {
+            return DeleteORNot(id.HasValue ? id.Value : 0, whatIn, false);
+        }
+        private ActionResult DeleteORNot(int id, string whatIn, bool delete) {
+            CatThreadView thread = dao.FindByID(id);
+            thread.Deleted = delete;
             if (thread == null) {
                 return HttpNotFound();
             }
-            throw new NotImplementedException();
+            dao.Update(thread);
+            return RedirectToAction("Find", new { what = whatIn });
         }
-
         //////////////////
         [HttpGet]
         public ActionResult Find(string what) {
             ICollection<CatThreadView> threads = null;
-            if (what == "*" || what.Length == 0) {
-                threads = dao.GetAll();
+            if (what == null || what == "*" || what.Length == 0) {
+                if (User.IsInRole("admin")) {
+                    threads = dao.GetAll();
+                } else {
+                    threads = dao.GetAll(true);
+                }
             } else {
                 threads = dao.FindByTitle(what);
             }

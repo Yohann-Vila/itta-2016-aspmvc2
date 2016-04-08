@@ -55,15 +55,14 @@ namespace CatExercise.Dao
             {
                 return CreateModelUserViewFromModel(user);
             }
-            // return CreateModelUserViewFromModel(user);
             return null;
 
         }
-        public ICollection<User> GetAll()
+        public ICollection<UserView> GetAll()
         {
-            IList<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
-           
-            return users;
+
+            ICollection <UserView> vusers = db.Users.ToList().Select(u => CreateModelUserViewFromModel(u)).ToList();
+            return vusers;
         }
 
 

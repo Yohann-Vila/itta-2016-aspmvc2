@@ -16,7 +16,7 @@ namespace CatExercise.Controllers
             IUserDAO dao = DAOFactory.getInstanceOfUser();
            // UserView user = dao.FindByID(id);
            
-           ICollection<UserView> user = dao.getPostsFromUser("test");
+            ICollection<UserView> user = dao.GetAll();
             return View(user);
 
         }

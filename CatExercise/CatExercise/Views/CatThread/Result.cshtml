@@ -8,16 +8,22 @@
 <h1>Liste des fils :</h1>
 <ul>
     @foreach (var item in Model) {
-       
-            <li>@Html.ActionLink(item.Titre.IsEmpty()?"Titre par défaut":item.Titre,"Details",new { id = item.CatThreadId }) 
-    @if (User.IsInRole("admin")) {
+        @:<li>
         if (item.Deleted) {
-            <a href="@Url.Action("UnDelete", new { id = item.CatThreadId })"><div class="glyphicon glyphicon-ok"></div></a>
-        } else {
-            <a href="@Url.Action("Delete", new { id = item.CatThreadId })"><div class="glyphicon glyphicon-remove"></div></a>
+            @:<s>
         }
-    }   
-    </li>
+        @Html.ActionLink(item.Titre.IsEmpty() ? "Titre par défaut" : item.Titre, "Details", new { id = item.CatThreadId })
+        if (item.Deleted) {
+            @:</s>
+        }
+        if (User.IsInRole("admin")) {
+            if (item.Deleted) {
+                <a href="@Url.Action("UnDelete", new { id = item.CatThreadId, whatIn = Request.Params["what"] })"><div class="glyphicon glyphicon-ok"></div></a>
+            } else {
+                <a href="@Url.Action("Delete", new { id = item.CatThreadId, whatIn = Request.Params["what"] })"><div class="glyphicon glyphicon-remove"></div></a>
+            }
+        }
+        @:</li>
     }
-</ul>   
+</ul>
 

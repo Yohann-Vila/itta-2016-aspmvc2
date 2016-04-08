@@ -22,9 +22,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (Request.IsAuthenticated) {
+                    @if (User.Identity.IsAuthenticated) {
                         
-                        <li><a>Bonjour : @Session["userName"]</a></li>
+                        <li><a>Bonjour : @User.Identity.Name</a></li>
                         
 
                         <li>@Html.ActionLink("Logoff", "LogOff", "Account")</li>
