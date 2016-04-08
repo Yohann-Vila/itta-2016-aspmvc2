@@ -32,18 +32,40 @@
 </div>
 @foreach (var item in Model.comments)
 {
-
-
     <div class="row">
         <div class="col-md-4">@Html.DisplayFor(modelItem => item.UserName) <br><small>Le @Html.DisplayFor(modelItem => item.CreationDate)</small></div>
         <div class="col-md-7">@Html.DisplayFor(modelItem => item.Content)</div>
-
     </div>
         <div><br></div>
-
 }
+<div class="row">
+    @{if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <textarea cols="80" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Envoyer"/>
 
+            }
+
+
+        }
+    }
+</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CatThreadId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @{ if (Request.IsAuthenticated && User.Identity.Name == Model.UserName)
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CatThreadId });
+        }
+
+    }
+
+    @Html.ActionLink("Home", "Index")
 </p>
