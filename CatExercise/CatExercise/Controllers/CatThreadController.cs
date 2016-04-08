@@ -90,7 +90,7 @@ namespace CatExercise.Controllers {
                     cathread.CatThreadId = id;
                     dao.Update(cathread);
 
-                    return RedirectToAction("AjoutOK");
+                    return RedirectToAction("Details", new {id=cathread.CatThreadId });
 
                
             }
