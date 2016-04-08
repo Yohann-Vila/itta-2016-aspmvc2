@@ -82,7 +82,11 @@ namespace CatExercise.Controllers {
         public ActionResult Find(string what) {
             ICollection<CatThreadView> threads = null;
             if (what == null || what == "*" || what.Length == 0) {
-                threads = dao.GetAll();
+                if (User.IsInRole("admin")) {
+                    threads = dao.GetAll();
+                } else {
+                    threads = dao.GetAll(true);
+                }
             } else {
                 threads = dao.FindByTitle(what);
             }
