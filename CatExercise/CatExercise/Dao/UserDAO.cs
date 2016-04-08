@@ -61,8 +61,8 @@ namespace CatExercise.Dao
         }
         public ICollection<UserView> GetAll()
         {
-            ICollection<User> users = db.Users.Where(userx => userx.Banish != false).ToList();
-            ICollection<UserView> vusers = users.Select(u => CreateModelUserViewFromModel(u)).ToList();
+
+            ICollection <UserView> vusers = db.Users.ToList().Select(u => CreateModelUserViewFromModel(u)).ToList();
             return vusers;
         }
 
