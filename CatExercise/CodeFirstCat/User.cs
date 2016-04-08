@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 namespace CodeFirstCat {
     public class User {
         public int UserID { get; set; }
-        public String Login { get; set; }
-        public String Password { get; set; }
-        public String Pseudo { get; set; }
-        public Boolean Banish { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public bool Banish { get; set; }
         public int Seclevel { get; set; }
         public DateTime? Creationdate { get; set; }
         public ICollection<CatThread> CatThreads { get; set; }
         public ICollection<Comment> Comments { get; set; }
 
-        public User(String login, String password) {
+        public User(string login, string password) {
             this.Login = login;
             this.Password = password;
         }
