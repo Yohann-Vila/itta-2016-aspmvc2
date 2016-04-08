@@ -49,6 +49,17 @@ namespace CatExercise.Dao
         }
 
 
+        public UserView FindByLogin(String login)
+        {
+            var user = db.Users.FirstOrDefault(userx => userx.Login.Equals(login));
+            if (user != null)
+            {
+                return CreateModelUserViewFromModel(user);
+            }
+            return null;
+
+        }
+
         public UserView FindByID(int id)
         {
             var user = db.Users.FirstOrDefault(userx => userx.UserID == id);
