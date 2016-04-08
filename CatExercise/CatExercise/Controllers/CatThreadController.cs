@@ -31,7 +31,9 @@ namespace CatExercise.Controllers {
             {
                 return HttpNotFound();
             }
-            return View(thread);
+
+            dao.Update(thread);
+            return RedirectToAction("Details", new { id = thread.CatThreadId });
         }
 
         [HttpGet]

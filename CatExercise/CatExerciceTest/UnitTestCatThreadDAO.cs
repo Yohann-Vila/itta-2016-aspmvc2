@@ -105,5 +105,18 @@ namespace CatExerciceTest
             ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
             Assert.AreEqual(dao.FindByTitle(null).Count, 0);
         }
+
+        [TestMethod]
+        public void CatThreadUpdate()
+        {
+            ICatThreadDAO dao = DAOFactory.getInstanceOfCatThread();
+            int id = dao.Insert(CreateDummyCatThreadView("titre_original", "", 1));
+            CatThreadView thread = dao.FindByID(id);
+            thread.Titre = "nouveau_titre";
+            dao.Update(thread);
+            thread = dao.FindByID(id);
+
+            Assert.AreEqual(thread.Titre, "nouveau_titre");
+        }
     }
 }
