@@ -26,7 +26,7 @@
                     @if (User.IsInRole("admin"))
                       {
                         <li><a> * Admin * </a></li>
-                        <li>@Html.ActionLink("Index", "Index", "User")</li>
+                        <li>@Html.ActionLink("Utilisateurs", "Index", "User")</li>
                       }
 
                     @if (User.Identity.IsAuthenticated) {
