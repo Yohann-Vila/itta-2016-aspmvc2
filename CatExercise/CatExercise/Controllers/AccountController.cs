@@ -34,7 +34,12 @@ namespace CatExercise.Controllers {
             ModelState.AddModelError("", "Le nom d'utilisateur ou mot de passe fourni est incorrect.");
             return View(model);
         }
-
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult isExist(string Login) {
+            IUserDAO dao = DAOFactory.getInstanceOfUser();
+            return Json(dao.FindByLogin(Login)==null, JsonRequestBehavior.AllowGet);
+        }
         private ActionResult AuthUser(string returnUrl, UserView userFromDB, string role) {
             var authTicket = new FormsAuthenticationTicket(1, userFromDB.UserID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(120), false, role);
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
