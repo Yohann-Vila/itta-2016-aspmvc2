@@ -22,6 +22,24 @@ namespace CatExercise
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            if (Dao.DAOFactory.getInstanceOfUser().FindByLogin("test_user") == null) {
+                Dao.DAOFactory.getInstanceOfUser().Insert(new Models.UserView() {
+                    Banish = false,
+                    Creationdate = DateTime.Now,
+                    Login = "test_user",
+                    Password = "test_user",
+                    Seclevel = 0
+                });
+            }
+            if (Dao.DAOFactory.getInstanceOfUser().FindByLogin("test_admin") == null) {
+                Dao.DAOFactory.getInstanceOfUser().Insert(new Models.UserView() {
+                    Banish = false,
+                    Creationdate = DateTime.Now,
+                    Login = "test_admin",
+                    Password = "test_admin",
+                    Seclevel = 100
+                });
+            }
         }
 
         protected void Application_AuthenticateRequest(Object sender, EventArgs e) {
