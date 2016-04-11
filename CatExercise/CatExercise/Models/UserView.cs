@@ -10,6 +10,7 @@ namespace CatExercise.Models {
         [Required]
         [MaxLength(300)]
         [Display(Name = "Nom d'utilisateur")]
+        [System.Web.Mvc.Remote("isExist", "Account", ErrorMessage = "Le nom d'utilisateur existe déjà")]
         public string Login { get; set; }
         [Required]
         [DataType(DataType.Password)]

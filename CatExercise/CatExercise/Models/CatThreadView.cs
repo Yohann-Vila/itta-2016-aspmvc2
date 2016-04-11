@@ -12,6 +12,7 @@ namespace CatExercise.Models {
         [Required]
         [Display(Name = "Titre")]
         [MaxLength(300)]
+        [System.Web.Mvc.Remote("isExist","CatThread", ErrorMessage = "Le titre existe déjà")]
         public String Titre { get; set; }
         public String UriPhoto { get; set; }
         public bool Deleted { get; set; }
