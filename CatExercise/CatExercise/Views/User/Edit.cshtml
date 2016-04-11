@@ -4,17 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Gestion des utilisateurs</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <div>@Model.UserID </div>
+        <div> Identifiant interne (UID) <span> - </span>@Model.UserID 
                 @Html.HiddenFor(model => model.UserID)    
-
-        <legend>UserView</legend>
+            </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Login)
         </div>
