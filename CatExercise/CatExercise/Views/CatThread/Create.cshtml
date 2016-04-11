@@ -1,10 +1,10 @@
 ﻿@model CatExercise.Models.CatThreadView
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Ajouter un nouveau thread";
 }
 
-<h2>Edit</h2>
+<h2>Ajouter un nouveau thread</h2>
 
 
 @using (Html.BeginForm("Create", "CatThread", FormMethod.Post, new { enctype = "multipart/form-data" })) 
@@ -12,17 +12,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>CatThreadView</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div>@Model.UserName</div>
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Titre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,15 +34,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Enregistrer" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
