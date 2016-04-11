@@ -37,7 +37,7 @@ namespace CatExercise.Dao {
         ICollection<CatThreadView> FindByTitle(String partialTitle, bool onlyActif);
 
         ICollection<CatThreadView> FindByTitle(String partialTitle);
-
+        bool isExist(String Title);
         bool Update(CatThreadView catThreadView);
 
         /// <summary>

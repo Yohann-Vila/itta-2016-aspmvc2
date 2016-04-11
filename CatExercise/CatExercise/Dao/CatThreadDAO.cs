@@ -183,5 +183,10 @@ namespace CatExercise.Dao
         {
             return db.CatThreads.Where(thread => !(actif && thread.Deleted )).ToList();
         }
+
+
+        public bool isExist(string Title) {
+            return db.CatThreads.Where(thread => thread.Titre == Title).FirstOrDefault() != null;
+        }
     }
 }

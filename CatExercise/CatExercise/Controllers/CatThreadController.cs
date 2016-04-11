@@ -57,6 +57,9 @@ namespace CatExercise.Controllers {
         [HttpPost]
         [Authorize]
         public ActionResult Create(CatThreadView cathread) {
+            if (dao.isExist(cathread.Titre)) {
+                ModelState.AddModelError("Titre", "Le titre existe déjà !");
+            }
             if (ModelState.IsValid) {
                 // Use your file here
                 
