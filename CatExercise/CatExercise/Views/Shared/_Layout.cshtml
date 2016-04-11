@@ -29,7 +29,7 @@
                         <li>@Html.ActionLink("Utilisateurs", "Index", "User")</li>
                       }
 
-                    @if (User.Identity.IsAuthenticated) {
+                    @if (User.Identity.IsAuthenticated && !ViewContext.RouteData.GetRequiredString("action").Contains("LogOff")) {
                         
                         <li><a>
                             
