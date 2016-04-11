@@ -28,23 +28,27 @@ namespace CatExercise.Controllers {
                     if (userFromDB.Seclevel == 100) {
                         role += ";admin";
                     }
-                    var authTicket = new FormsAuthenticationTicket(1,userFromDB.UserID.ToString(),DateTime.Now,DateTime.Now.AddMinutes(120),false,role);
-                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                    var nameCookie = new HttpCookie("name", userFromDB.Login);
-
-                    HttpContext.Response.Cookies.Add(authCookie);
-                    HttpContext.Response.Cookies.Add(nameCookie);
-
-                    if (returnUrl != null && returnUrl.Length > 0) {
-                        return Redirect(returnUrl);
-                    } else {
-                        return RedirectToAction("Index", "CatThread");
-                    }
+                    return AuthUser(returnUrl, userFromDB, role);
                 }
             }
             ModelState.AddModelError("", "Le nom d'utilisateur ou mot de passe fourni est incorrect.");
             return View(model);
+        }
+
+        private ActionResult AuthUser(string returnUrl, UserView userFromDB, string role) {
+            var authTicket = new FormsAuthenticationTicket(1, userFromDB.UserID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(120), false, role);
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            var nameCookie = new HttpCookie("name", userFromDB.Login);
+
+            HttpContext.Response.Cookies.Add(authCookie);
+            HttpContext.Response.Cookies.Add(nameCookie);
+
+            if (returnUrl != null && returnUrl.Length > 0) {
+                return Redirect(returnUrl);
+            } else {
+                return RedirectToAction("Index", "CatThread");
+            }
         }
         [AllowAnonymous]
         [HttpGet]
@@ -66,18 +70,12 @@ namespace CatExercise.Controllers {
         public ActionResult Register(UserView model, string returnUrl) {
             if (ModelState.IsValid) {
                 IUserDAO dao = DAOFactory.getInstanceOfUser();
-                if (dao.Find(model.Login) == null) {
+                if (dao.FindByLogin(model.Login) == null) {
                     model.Seclevel = 0;
                     model.Banish = false;
                     model.Creationdate = DateTime.Now;
                     if (dao.Insert(model)) {
-                        FormsAuthentication.SetAuthCookie(model.UserID.ToString(), false);
-                        Session.Add("userName", model.Login);
-                        if (returnUrl != null && returnUrl.Length > 0) {
-                            return Redirect(returnUrl);
-                        } else {
-                            return RedirectToAction("Index", "CatThread");
-                        }
+                        return AuthUser(returnUrl, dao.FindByLogin(model.Login), "user");
                     }
                 } else {
                     ModelState.AddModelError("", "Le nom d'utilisateur exist deja");
