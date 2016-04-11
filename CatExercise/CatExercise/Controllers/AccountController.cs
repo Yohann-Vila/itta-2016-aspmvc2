@@ -44,7 +44,7 @@ namespace CatExercise.Controllers {
             HttpContext.Response.Cookies.Add(authCookie);
             HttpContext.Response.Cookies.Add(nameCookie);
 
-            if (returnUrl != null && returnUrl.Length > 0) {
+            if (returnUrl != null && returnUrl.Length > 0 && !returnUrl.Contains("LogOff")) {
                 return Redirect(returnUrl);
             } else {
                 return RedirectToAction("Index", "CatThread");
@@ -87,7 +87,7 @@ namespace CatExercise.Controllers {
         public ActionResult LogOff(string returnUrl) {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction(returnUrl);
+            return View();
         }
     }
 }
