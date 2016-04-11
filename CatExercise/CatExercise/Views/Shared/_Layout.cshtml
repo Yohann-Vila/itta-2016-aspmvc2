@@ -31,7 +31,14 @@
 
                     @if (User.Identity.IsAuthenticated) {
                         
-                        <li><a>Bonjour : @Request.Cookies["name"].Value</a></li>
+                        <li><a>
+                            
+                            @if (Request.Cookies["name"] != null) {
+                                @Html.Raw(" Bonjour : " + Request.Cookies["name"].Value);                 
+                            }
+                                         
+
+                                             </a></li>
                         
 
                         <li>@Html.ActionLink("Logoff", "LogOff", "Account")</li>

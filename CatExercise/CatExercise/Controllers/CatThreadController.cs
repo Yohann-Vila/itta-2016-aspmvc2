@@ -18,10 +18,11 @@ namespace CatExercise.Controllers {
 
         [HttpGet]
         public ActionResult Edit(int? id) {
-            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
-            if (thread == null) {
+            if (!id.HasValue) {
                 return HttpNotFound();
             }
+            CatThreadView thread = dao.FindByID(id.Value);
+
             return View(thread);
         }
 
@@ -98,10 +99,10 @@ namespace CatExercise.Controllers {
         }
         [HttpGet]
         public ActionResult Details(int? id) {
-            CatThreadView thread = dao.FindByID(id.HasValue ? id.Value : 0);
-            if (thread == null) {
+            if (!id.HasValue) {
                 return HttpNotFound();
             }
+            CatThreadView thread = dao.FindByID(id.Value);
             return View(thread);
         }
 
