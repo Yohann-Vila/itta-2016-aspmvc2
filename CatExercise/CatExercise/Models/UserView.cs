@@ -8,6 +8,7 @@ namespace CatExercise.Models {
     public class UserView {
         public int UserID { get; set; }
         [Required]
+        [MaxLength(300)]
         [Display(Name = "Nom d'utilisateur")]
         public string Login { get; set; }
         [Required]

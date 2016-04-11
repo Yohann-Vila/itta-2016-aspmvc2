@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using CodeFirstCat;
 using CatExercise.Models;
+using System.Data.Entity;
 
 namespace CatExercise.Dao
 {
@@ -111,7 +112,8 @@ namespace CatExercise.Dao
                 TemporaryInt = random
             };
             
-            db.CatThreads.Add(catThread);
+            db.CatThreads.Attach(catThread);
+            db.Entry(catThread).State = EntityState.Added; 
             db.SaveChanges();
 
             // finds back the newly inserted thread and returns ID

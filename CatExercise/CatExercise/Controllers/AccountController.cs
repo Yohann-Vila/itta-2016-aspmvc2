@@ -78,7 +78,7 @@ namespace CatExercise.Controllers {
                         return AuthUser(returnUrl, dao.FindByLogin(model.Login), "user");
                     }
                 } else {
-                    ModelState.AddModelError("", "Le nom d'utilisateur exist deja");
+                    ModelState.AddModelError("", "Le nom d'utilisateur existe deja");
                 }
             }
             return View(model);

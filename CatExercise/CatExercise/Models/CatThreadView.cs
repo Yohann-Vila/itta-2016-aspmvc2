@@ -11,6 +11,7 @@ namespace CatExercise.Models {
         public int UserID { get; set; }
         [Required]
         [Display(Name = "Titre")]
+        [MaxLength(300)]
         public String Titre { get; set; }
         public String UriPhoto { get; set; }
         public bool Deleted { get; set; }
