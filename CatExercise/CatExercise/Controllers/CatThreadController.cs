@@ -67,23 +67,23 @@ namespace CatExercise.Controllers {
                     cathread.UserName = DAOFactory.getInstanceOfUser().FindByID(cathread.UserID).Login;
                    
                     int id = dao.Insert(cathread);
-                    String ext = "";
-                    if (cathread.File.FileName.Contains("jpg")) {
+                    String ext=null;
+                    if (cathread.File.FileName.ToLower().Contains("jpg")) {
                         ext = "jpg";
                     }
-                    if (cathread.File.FileName.Contains("png")) {
-                        ext = "jpg";
+                    if (cathread.File.FileName.ToLower().Contains("png")) {
+                        ext = "png";
                     }
-                    if (cathread.File.FileName.Contains("gif")) {
-                        ext = "jpg";
+                    if (cathread.File.FileName.ToLower().Contains("gif")) {
+                        ext = "gif";
                     }
-                    if (ext == String.Empty) {
+                    if (ext == null || ext == String.Empty) {
                         ModelState.AddModelError("File", "Merci de choisir une extension valide");
                     }
                     var fileName = id + "." + ext;
                     
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                    using (FileStream fileStream = new FileStream(path,FileMode.CreateNew)) {
+                    using (FileStream fileStream = new FileStream(path,FileMode.Create)) {
                         cathread.File.InputStream.CopyTo(fileStream);
                     }
 
