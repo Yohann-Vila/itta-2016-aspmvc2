@@ -116,7 +116,7 @@ namespace CatExercise.Controllers {
                 return HttpNotFound();
             }
  
-            UserView user = DAOFactory.getInstanceOfUser().FindByLogin(User.Identity.Name);
+            UserView user = DAOFactory.getInstanceOfUser().FindByID(int.Parse(User.Identity.Name));
             var daoComment = DAOFactory.getInstanceOfComment();
             CommentView comment = new CommentView()
             {
@@ -130,7 +130,7 @@ namespace CatExercise.Controllers {
             
             daoComment.insert(comment);
 
-            return View(thread);
+            return RedirectToAction("Details", new {id=thread.CatThreadId});
         }
 
         [HttpGet]

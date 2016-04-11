@@ -31,7 +31,7 @@
 
                     @if (User.Identity.IsAuthenticated) {
                         
-                        <li><a>Bonjour : @User.Identity.Name</a></li>
+                        <li><a>Bonjour : @Request.Cookies["name"].Value</a></li>
                         
 
                         <li>@Html.ActionLink("Logoff", "LogOff", "Account")</li>

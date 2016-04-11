@@ -31,7 +31,10 @@ namespace CatExercise.Controllers {
                     var authTicket = new FormsAuthenticationTicket(1,userFromDB.UserID.ToString(),DateTime.Now,DateTime.Now.AddMinutes(120),false,role);
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    var nameCookie = new HttpCookie("name", userFromDB.Login);
+
                     HttpContext.Response.Cookies.Add(authCookie);
+                    HttpContext.Response.Cookies.Add(nameCookie);
 
                     if (returnUrl != null && returnUrl.Length > 0) {
                         return Redirect(returnUrl);
