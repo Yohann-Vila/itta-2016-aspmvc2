@@ -83,7 +83,7 @@ namespace CatExercise.Controllers {
                     var fileName = id + "." + ext;
                     
                     var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                    using (FileStream fileStream = new FileStream(path,FileMode.CreateNew)) {
+                    using (FileStream fileStream = new FileStream(path,FileMode.Create)) {
                         cathread.File.InputStream.CopyTo(fileStream);
                     }
 
