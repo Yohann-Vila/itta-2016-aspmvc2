@@ -108,7 +108,10 @@ namespace CatExercise.Controllers {
             CatThreadView thread = dao.FindByID(id.Value);
             return View(thread);
         }
-
+        [HttpGet]
+        public JsonResult isExist(string Titre) {
+            return Json(!dao.isExist(Titre), JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         [Authorize]
         public ActionResult Details(int? id, string commentContent)
