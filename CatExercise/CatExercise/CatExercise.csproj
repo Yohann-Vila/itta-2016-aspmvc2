@@ -122,7 +122,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CatThreadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Dao\CatThreadDAO.cs" />
     <Compile Include="Dao\CommentDAO.cs" />
     <Compile Include="Dao\DAOFactory.cs" />
@@ -174,7 +173,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Comment\Index - Copier.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\CatThread\Details.cshtml" />
     <Content Include="Views\CatThread\Edit.cshtml" />
@@ -208,9 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Comment\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
